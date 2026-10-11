@@ -680,7 +680,7 @@ function pickVoice() {
   const el = $("#voiceName");
   if (el) el.textContent = S.engine === "online"
     ? "Online voice plays even when your iPhone is on silent. Needs internet. It uses Google Translate's free voice, which could change without notice — if it stops working, switch to \"This device\"."
-    : (voice ? `Using ${voice.name} (${voice.lang}). Works offline. iPhone mutes this voice when the phone is on silent.` : (vs.length ? "No Korean voice found on this device." : "Works offline. iPhone mutes this voice when the phone is on silent."));
+    : (voice ? `Using ${voice.name} (${voice.lang}). Works offline. On an iPhone this voice is silent whenever the ring/silent switch is on silent — use Online if you hear nothing.` : (vs.length ? "No Korean voice found on this device." : "Works offline. On an iPhone this voice is silent whenever the ring/silent switch is on silent — use Online if you hear nothing."));
 }
 if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
 // Two voices: "online" plays a short audio clip (plays even when an iPhone is on silent, needs internet);
@@ -688,29 +688,47 @@ if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged 
 const clip = new Audio();
 try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch (e) {}
 const onlineUrl = t => "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ko&q=" + encodeURIComponent(t.slice(0, 190));
+// Returns true if the built-in voice was cut off mid-sentence (the next line then needs a short pause before it).
 function stopAudio() {
   try { clip.pause(); } catch (e) {}
-  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  speakNo++;   // anything still waiting to speak, or to fall back, is now out of date
+  let cut = false;
+  if ("speechSynthesis" in window && (speechSynthesis.speaking || speechSynthesis.pending)) { speechSynthesis.cancel(); cut = true; }
   if (playingBtn) playingBtn.classList.remove("playing");
+  return cut;
 }
+function playOnline(text, done) {
+  clip.onended = done;
+  clip.onerror = () => { done(); toast("The online voice didn't load. Check your internet, or pick \"This device\" voice in settings."); };
+  clip.src = onlineUrl(text);
+  clip.defaultPlaybackRate = clip.playbackRate = S.slow ? 0.7 : 1;
+  clip.play().catch(err => { if (err && err.name !== "AbortError") clip.onerror(); });
+}
+let speakNo = 0, saying = null;   // saying keeps the current line alive: Safari drops one that nothing refers to
 function speak(text, btn) {
-  stopAudio();
+  const cut = stopAudio(), no = ++speakNo;
   if (btn) { btn.classList.add("playing"); playingBtn = btn; }
   const done = () => { if (btn) btn.classList.remove("playing"); };
-  if (S.engine === "online" && navigator.onLine !== false) {
-    clip.onended = done;
-    clip.onerror = () => { done(); toast("The online voice didn't load. Check your internet, or pick \"This device\" voice in settings."); };
-    clip.src = onlineUrl(text);
-    clip.defaultPlaybackRate = clip.playbackRate = S.slow ? 0.7 : 1;
-    clip.play().catch(err => { if (err && err.name !== "AbortError") clip.onerror(); });
-    return;
-  }
+  if (S.engine === "online" && navigator.onLine !== false) return playOnline(text, done);
   if (!("speechSynthesis" in window)) { done(); toast("This browser can't play audio. Try the online voice in settings."); return; }
-  const u = new SpeechSynthesisUtterance(text);
+  pickVoice();
+  const u = saying = new SpeechSynthesisUtterance(text);
   u.lang = "ko-KR"; if (voice) u.voice = voice;
   u.rate = S.slow ? 0.6 : 0.9;
-  u.onend = u.onerror = done;
-  speechSynthesis.speak(u);
+  let started = false;
+  u.onstart = () => { started = true; };
+  u.onend = done;
+  u.onerror = e => { done(); if (!started && no === speakNo && e.error !== "interrupted" && e.error !== "canceled") fallBack(); };
+  // If the phone's own voice never starts, play the online one instead so there is always sound.
+  const fallBack = () => { if (no !== speakNo || navigator.onLine === false) return; speechSynthesis.cancel(); playOnline(text, done); if (!warnedVoice) { warnedVoice = true; toast("This device's voice didn't start, so the online voice is playing instead."); } };
+  const go = () => {
+    if (no !== speakNo) return;
+    try { speechSynthesis.resume(); } catch (e) {}
+    speechSynthesis.speak(u);
+    setTimeout(() => { if (!started && no === speakNo) fallBack(); }, 1800);
+  };
+  // iPhone loses a line that is spoken straight after another one is cancelled, so leave a short gap
+  if (cut) setTimeout(go, 90); else go();
   if (!voice && !warnedVoice && speechSynthesis.getVoices().length) { warnedVoice = true; toast("No Korean voice on this device. Try the online voice in settings."); }
 }
 
