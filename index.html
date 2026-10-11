@@ -1,0 +1,1350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Korean Talk</title>
+<meta name="description" content="Everyday Korean — Hangul trainer, conversations, phrases and slang, with audio.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="referrer" content="no-referrer"><!-- the online voice refuses requests that name another website -->
+<meta name="apple-mobile-web-app-title" content="Korean Talk">
+<link rel="apple-touch-icon" href="apple-touch-icon.png"><!-- icon used by iPhone "Add to Home Screen" -->
+<meta name="theme-color" content="#f6f3ed" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f4fa8'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' fill='white' font-family='Apple SD Gothic Neo,Noto Sans KR,sans-serif'%3E말%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f6f3ed; --surface:#fffdf8; --surface-2:#efe9df; --ink:#1f1c18; --ink-2:#4a453e; --muted:#766e64; --line:#e3dccf;
+  --accent:#2f4fa8; --accent-ink:#fff; --accent-soft:#e0e6f5; --seal:#c8473b;
+  --jade:#2a7553; --jade-soft:#dfeee5; --amber:#8a5d00; --amber-soft:#f4e8cd;
+  --t1:#c62f2a; --t2:#b87200; --t3:#23824c; --t4:#2a5fc4; --t5:#8b857c;
+  --shadow:0 1px 2px rgba(40,30,20,.05),0 6px 20px rgba(40,30,20,.05);
+  --wash:#2b2620; --paper:var(--bg);
+  --radius:14px;
+  --fs:1; /* text size multiplier, set from Settings → Text size */
+  --ko:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --ko-serif:"AppleMyungjo","Nanum Myeongjo","Noto Serif KR","Apple SD Gothic Neo",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121110; --surface:#1b1a18; --surface-2:#262421; --ink:#efebe4; --ink-2:#cfc8bd; --muted:#9d968b; --line:#302d29;
+    --accent:#86a2f2; --accent-ink:#10182e; --accent-soft:#1f2942; --seal:#e0594d;
+    --jade:#5cc08f; --jade-soft:#1a3127; --amber:#e3b252; --amber-soft:#382d16;
+    --t1:#ff7366; --t2:#f2b440; --t3:#5fcb8f; --t4:#79a9ff; --t5:#9a948a; --wash:#d8d0c2;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121110; --surface:#1b1a18; --surface-2:#262421; --ink:#efebe4; --ink-2:#cfc8bd; --muted:#9d968b; --line:#302d29;
+  --accent:#86a2f2; --accent-ink:#10182e; --accent-soft:#1f2942; --seal:#e0594d;
+  --jade:#5cc08f; --jade-soft:#1a3127; --amber:#e3b252; --amber-soft:#382d16;
+  --t1:#ff7366; --t2:#f2b440; --t3:#5fcb8f; --t4:#79a9ff; --t5:#9a948a; --wash:#d8d0c2;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:calc(15px*var(--fs))/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a{color:inherit}
+svg{display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+
+/* ── top bar ── */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.top .wrap{display:flex;align-items:center;gap:12px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.seal{width:34px;height:34px;border-radius:9px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:600 calc(20px*var(--fs))/1 var(--ko)}
+.brand b{font-size:calc(16px*var(--fs));letter-spacing:-.01em}
+.search{flex:1;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 12px;height:40px;min-width:0}
+.search svg{color:var(--muted);flex:none}
+.search input{flex:1;min-width:0;border:0;background:none;color:var(--ink);font:inherit;font-size:calc(15px*var(--fs));outline:none}
+.search input::placeholder{color:var(--muted)}
+.icon-btn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--ink-2);flex:none}
+.icon-btn:hover{background:var(--surface-2)}
+@media (max-width:560px){.brand b{display:none}}
+
+/* ── home ── */
+.bar{height:6px;border-radius:6px;background:var(--surface-2);overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:var(--jade);border-radius:6px;transition:width .4s}
+.news{margin:18px 0 4px;display:flex;gap:10px;align-items:baseline;font-size:max(12px,calc(13px*var(--fs)));color:var(--ink-2);flex-wrap:wrap}
+.news b{color:var(--accent);font-weight:600;font-size:max(12px,calc(12px*var(--fs)));letter-spacing:.06em;text-transform:uppercase}
+.continue{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:600;text-decoration:none;font-size:calc(14px*var(--fs))}
+.area{margin-top:30px}
+.area h2{display:flex;align-items:baseline;gap:10px;margin:0 0 12px;font-size:calc(20px*var(--fs));letter-spacing:-.01em}
+.area h2 span{font-family:var(--ko-serif);color:var(--muted);font-weight:500;font-size:calc(18px*var(--fs))}
+.area h2 em{margin-left:auto;font-style:normal;font-size:max(12px,calc(13px*var(--fs)));color:var(--muted);font-weight:500}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.card{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 16px 14px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.card .koT{font:600 calc(23px*var(--fs))/1.2 var(--ko-serif);display:flex;align-items:center;gap:8px}
+.card .enT{font-weight:600;font-size:calc(15px*var(--fs));margin-top:4px}
+.card .meta{font-size:max(12px,calc(13px*var(--fs)));color:var(--muted);margin-top:2px}
+.card .foot{display:flex;justify-content:space-between;font-size:max(12px,calc(12px*var(--fs)));color:var(--muted);margin-top:6px}
+.tag-new{font:600 max(12px,calc(12px*var(--fs)))/1 -apple-system,sans-serif;background:var(--accent);color:var(--accent-ink);padding:4px 7px;border-radius:6px;letter-spacing:.02em}
+.card.mine{border-style:dashed}
+
+/* ── buttons ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:11px;font-weight:600;font-size:calc(14px*var(--fs));background:var(--surface-2);color:var(--ink);text-decoration:none;white-space:nowrap}
+.btn:hover{filter:brightness(.97)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:none;border:1px solid var(--line)}
+.btn.small{height:34px;padding:0 12px;font-size:max(12px,calc(13px*var(--fs)))}
+
+/* ── module page ── */
+.mhead{padding:24px 0 6px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:calc(14px*var(--fs));margin-bottom:12px}
+.back:hover{color:var(--ink)}
+.mtitle{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.mtitle h1{margin:0;font-size:calc(clamp(24px,4vw,32px)*var(--fs));letter-spacing:-.02em;line-height:1.15}
+.mtitle .koT{font:600 calc(clamp(24px,4vw,32px)*var(--fs))/1.15 var(--ko-serif);color:var(--accent)}
+.mtitle .grow{flex:1}
+.mstats{color:var(--muted);font-size:calc(14px*var(--fs));margin-top:6px}
+.mbtns{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.mbtns:empty{display:none}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:10px;padding:3px}
+.seg button{height:30px;padding:0 12px;border-radius:8px;font-size:max(12px,calc(13px*var(--fs)));font-weight:600;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.switch{display:inline-flex;align-items:center;gap:8px;font-size:max(12px,calc(13px*var(--fs)));font-weight:600;color:var(--ink-2);cursor:pointer;user-select:none}
+.switch input{appearance:none;-webkit-appearance:none;width:34px;height:20px;border-radius:20px;background:var(--line);position:relative;cursor:pointer;margin:0;transition:background .2s}
+.switch input::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .2s}
+.switch input:checked{background:var(--jade)}
+.switch input:checked::after{transform:translateX(14px)}
+
+.group h3{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;margin:0 0 8px;font-size:calc(17px*var(--fs))}
+.group h3 span{font:500 calc(16px*var(--fs)) var(--ko-serif);color:var(--muted);white-space:nowrap}
+.group h3 em{margin-left:auto;font-style:normal;font-size:max(12px,calc(12px*var(--fs)));color:var(--muted);font-weight:500}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr) auto;gap:16px;padding:14px 14px 14px 18px;border-top:1px solid var(--line);align-items:start;transition:background .2s}
+.row:first-child{border-top:0}
+.row.is-known{background:color-mix(in srgb,var(--jade-soft) 45%,transparent)}
+.en-t{margin:2px 0 0;font-size:calc(15.5px*var(--fs));line-height:1.45;font-weight:500}
+.meta{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin-top:6px}
+.lvl{font-size:max(12px,calc(12px*var(--fs)));font-weight:600;padding:2px 8px;border-radius:6px;line-height:1.5}
+.lvl.E{background:var(--jade-soft);color:var(--jade)}
+.lvl.M{background:var(--amber-soft);color:var(--amber)}
+.lvl.H{background:var(--accent-soft);color:var(--accent)}
+.note{font-size:calc(13.5px*var(--fs));color:var(--ink-2);line-height:1.45}
+.mod-label{font-size:max(12px,calc(12px*var(--fs)));color:var(--muted)}
+.ko{display:flex;flex-wrap:wrap;align-content:flex-start;text-align:left;border-radius:10px;padding:2px 4px;margin:-2px -4px;cursor:pointer}
+.ko:hover{background:var(--surface-2)}
+.c{display:inline-flex;flex-direction:column;align-items:center;margin:0 0 4px}
+.c.sp{margin-left:.45em}
+.c b{font:400 calc(22px*var(--fs))/1.25 var(--ko);color:var(--ink)}
+.c i{font:500 max(12px,calc(12.5px*var(--fs)))/1.2 -apple-system,"Segoe UI",sans-serif;font-style:normal;color:var(--muted);min-height:15px;padding:0 1px;white-space:nowrap}
+.c.x b{font-family:-apple-system,"Segoe UI",var(--ko)}
+.no-rom .c i{display:none}
+.acts{display:grid;grid-template-columns:36px 36px;gap:6px;align-content:start}
+.ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:var(--muted);border:1px solid var(--line);background:var(--surface)}
+.ic:hover{color:var(--ink);border-color:var(--muted)}
+.ic.say.playing{color:var(--accent);border-color:var(--accent);animation:pulse 1s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 4px var(--accent-soft)}}
+.ic.tick[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#fff}
+.ic.star[aria-pressed="true"]{background:var(--amber-soft);border-color:var(--amber);color:var(--amber)}
+[aria-pressed="true"]>.star-i{fill:currentColor}
+.keys-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;padding:0 14px 14px}
+.key{background:var(--amber-soft);border-radius:10px;padding:10px 42px 10px 12px;position:relative}
+.kstar{position:absolute;top:4px;right:4px;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:var(--amber);opacity:.6}
+.kstar:hover,.kstar[aria-pressed="true"]{opacity:1}
+.key>i{display:block;font-style:normal;font-size:max(12px,calc(12px*var(--fs)));color:var(--muted);margin-top:4px}
+.key>b{display:block;font-size:calc(14px*var(--fs));color:var(--amber);margin-bottom:2px}
+.key>span{display:block;font-size:calc(14px*var(--fs));line-height:1.5;color:var(--ink)}
+/* Korean words on a card: word with romanization underneath, a little smaller than in the phrase list */
+.key .c{margin:0 1px 3px;vertical-align:baseline}
+.key .c b{font-size:calc(17px*var(--fs));line-height:1.2}
+.key>b .c b{color:inherit;font-weight:600}
+.key .c i{font-size:max(12px,calc(12px*var(--fs)))}
+.empty{padding:40px 16px;text-align:center;color:var(--muted)}
+.section-note{font-size:max(12px,calc(13px*var(--fs)));color:var(--muted);margin:16px 0 0}
+
+/* ── my phrases editor ── */
+.editor{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-top:16px;box-shadow:var(--shadow)}
+.editor textarea{width:100%;min-height:260px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:calc(14px*var(--fs))/1.6 ui-monospace,Menlo,monospace;padding:12px;resize:vertical}
+.editor p{margin:0 0 10px;font-size:calc(13.5px*var(--fs));color:var(--ink-2)}
+.editor code{background:var(--surface-2);padding:1px 5px;border-radius:5px;font-size:max(12px,calc(13px*var(--fs)))}
+.editor .btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+
+/* ── settings sheet ── */
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:40;display:none}
+.sheet{position:fixed;z-index:41;right:16px;top:calc(68px + env(safe-area-inset-top));width:min(340px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.2);padding:8px 16px 16px;display:none}
+.sheet.open,.sheet-bg.open{display:block}
+.sheet{max-height:calc(100vh - 84px);max-height:calc(100dvh - 84px - env(safe-area-inset-top));overflow-y:auto}
+#fsSeg{align-items:center}
+#fsSeg span{min-width:3.4em;text-align:center;font-size:max(12px,calc(13px*var(--fs)));font-weight:600}
+.seg button:disabled{opacity:.35;cursor:default}
+.sheet h4{margin:10px 0 4px;font-size:max(12px,calc(12px*var(--fs)));text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.sheet .opt{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:calc(14px*var(--fs))}
+.sheet .opt:last-of-type{border-bottom:0}
+.sheet .voice{font-size:max(12px,calc(12.5px*var(--fs)));color:var(--muted);margin-top:8px}
+.danger{display:block;color:var(--accent);font-weight:600;font-size:calc(14px*var(--fs));margin-top:14px;text-align:left}
+.danger small{display:block;font-weight:400;color:var(--muted);font-size:max(12px,calc(12.5px*var(--fs)));margin-top:1px}
+
+/* ── practice ── */
+.pr{position:fixed;inset:0;z-index:50;background:var(--bg);display:none;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.pr.open{display:flex}
+.pr-top{display:flex;align-items:center;gap:12px;padding:12px 16px;max-width:720px;width:100%;margin:0 auto}
+.pr-top .count{font-weight:600;font-size:calc(14px*var(--fs));color:var(--ink-2);white-space:nowrap}
+.pr-top .grow{flex:1}
+.pr-prog{height:4px;background:var(--surface-2);max-width:688px;width:calc(100% - 32px);margin:0 auto;border-radius:4px;overflow:hidden}
+.pr-prog i{display:block;height:100%;background:var(--accent);transition:width .3s}
+.pr-body{flex:1;display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
+.flash{width:100%;max-width:640px;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:28px 24px;text-align:center;min-height:300px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.flash .q-en{font-size:calc(clamp(20px,4.5vw,26px)*var(--fs));font-weight:600;line-height:1.35;letter-spacing:-.01em}
+.flash .ko{justify-content:center;margin:0;cursor:default}
+.flash .ko:hover{background:none}
+.flash .c b{font-size:calc(clamp(26px,6vw,34px)*var(--fs))}
+.flash .c i{font-size:calc(14px*var(--fs))}
+.flash .divider{height:1px;background:var(--line);margin:4px 0}
+.flash .say-big{align-self:center;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;border:1px solid var(--line);color:var(--ink-2);font-weight:600;font-size:calc(14px*var(--fs))}
+.flash .say-big.playing{color:var(--accent);border-color:var(--accent)}
+.flash .say-big[aria-pressed="true"]{color:var(--amber);border-color:var(--amber);background:var(--amber-soft)}
+.flash-acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.flash .note{font-size:calc(13.5px*var(--fs))}
+.pr-btns{display:flex;gap:10px;justify-content:center;padding:12px 16px 20px;max-width:720px;width:100%;margin:0 auto}
+.pr-btns .btn{flex:1;height:52px;font-size:calc(16px*var(--fs));border-radius:14px;max-width:300px}
+.btn.got{background:var(--jade);color:var(--surface)}
+.pr-hint{text-align:center;font-size:max(12px,calc(12px*var(--fs)));color:var(--muted);padding-bottom:12px}
+@media (hover:none){.pr-hint{display:none}}
+.done h2{margin:0;font-size:calc(26px*var(--fs))}
+.done p{margin:0;color:var(--ink-2)}
+
+/* ── ink-wash art ── */
+.art svg{display:block;width:100%;height:100%}
+.art .w{fill:var(--wash)} .art .ws{stop-color:var(--wash)} .art .pp{fill:var(--paper)} .art .pps{stop-color:var(--paper)}
+.art .seal{fill:var(--seal)} .art .st{fill:none;stroke:var(--wash)} .art .sp{fill:none;stroke:var(--paper)}
+.bgart{position:fixed;left:0;right:0;bottom:0;height:42vh;z-index:-1;pointer-events:none;opacity:.9}
+.mhead{position:relative}
+.mhead>*{position:relative;z-index:1}
+.mhead-art{position:absolute!important;z-index:0!important;top:0;bottom:-10px;right:-16px;width:62%;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 40%,#000 90%,transparent),linear-gradient(#000 55%,transparent);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent,#000 40%,#000 90%,transparent),linear-gradient(#000 55%,transparent);
+  mask-composite:intersect}
+.card{overflow:hidden}
+.card-art{--paper:var(--surface);height:92px;margin:-16px -16px 12px;border-bottom:1px solid var(--line)}
+.card-art svg{transition:transform .5s}
+.card:hover .card-art svg{transform:scale(1.04)}
+.pr-art{position:absolute;left:0;right:0;bottom:0;height:40vh;pointer-events:none;z-index:0}
+.pr>*:not(.pr-art){position:relative;z-index:1}
+@media (max-width:700px){
+  .mhead-art{width:90%;opacity:.55}
+}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:calc(14px*var(--fs));opacity:0;pointer-events:none;transition:all .25s;z-index:60;max-width:calc(100vw - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.warn{background:var(--accent-soft);color:var(--accent);border-radius:12px;padding:10px 14px;margin-top:16px;font-size:calc(14px*var(--fs))}
+footer{color:var(--muted);font-size:max(12px,calc(12.5px*var(--fs)));text-align:center;padding:40px 16px calc(40px + env(safe-area-inset-bottom))}
+/* ── app shell: bottom tab bar + floating buttons ── */
+body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.tabbar-in{display:grid;grid-template-columns:repeat(5,1fr);max-width:560px;margin:0 auto;height:62px;padding:0 6px}
+.tb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--muted);text-decoration:none;font-size:12px;font-weight:600;position:relative;min-width:0}
+.tb[aria-current="page"]{color:var(--accent)}
+.tb-go{color:var(--accent)}
+.tb-go i{width:48px;height:48px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;margin-top:-24px;border:3px solid var(--bg);box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 40%,transparent)}
+.tb em{position:absolute;top:5px;left:calc(50% + 5px);min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font:700 12px/18px -apple-system,sans-serif;font-style:normal;text-align:center}
+.tb em:empty{display:none}
+/* bottom-left, so they never sit on top of a phrase's buttons (those are on the right) */
+.fabs{position:fixed;left:14px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:25;display:flex;flex-direction:column;align-items:flex-start;gap:8px;pointer-events:none}
+.fab{pointer-events:auto;height:44px;min-width:44px;padding:0 16px;border-radius:22px;background:var(--surface);border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,0,0,.16);display:inline-flex;align-items:center;justify-content:center;gap:6px;color:var(--ink);font-weight:600;font-size:max(12px,calc(13px*var(--fs)))}
+.fab.round{padding:0;width:44px}
+.fab.next{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.fab[hidden]{display:none}
+@media (max-width:560px){#themeBtn{display:none}}
+
+/* ── home: goal banner, category chips, carousel, product-style cards ── */
+.hello{margin:18px 0 12px;font-size:calc(clamp(20px,3.4vw,28px)*var(--fs));line-height:1.2;letter-spacing:-.02em;font-weight:700}
+.hello span{font-family:var(--ko-serif);font-weight:600;color:var(--accent);white-space:nowrap}
+.goal{position:relative;overflow:hidden;display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
+.goal-art{--paper:var(--surface);position:absolute;top:0;bottom:0;right:0;width:65%;opacity:.55;pointer-events:none;-webkit-mask-image:linear-gradient(to right,transparent,#000 70%);mask-image:linear-gradient(to right,transparent,#000 70%)}
+.ring{--p:0;flex:none;width:86px;height:86px;border-radius:50%;background:conic-gradient(var(--jade) calc(var(--p)*1%),var(--surface-2) 0);display:grid;place-items:center;position:relative}
+.ring::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--surface)}
+.ring div{position:relative;text-align:center;line-height:1.1}
+.ring b{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.ring small{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.goal-txt{position:relative;min-width:0;flex:1}
+.goal-h{font-weight:700;font-size:calc(17px*var(--fs));line-height:1.25}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
+.pill{display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;border-radius:13px;background:var(--surface-2);font-size:max(12px,calc(12.5px*var(--fs)));font-weight:600;color:var(--ink-2);white-space:nowrap;text-decoration:none}
+.pill.hot{background:var(--accent-soft);color:var(--accent)}
+.goal-btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:16px -16px 0;padding:0 16px 2px}
+.chips::-webkit-scrollbar,.hscroll::-webkit-scrollbar,.tabs::-webkit-scrollbar{display:none}
+.chip{flex:none;height:36px;padding:0 15px;border-radius:18px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:max(12px,calc(13.5px*var(--fs)));color:var(--ink-2);white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.area{scroll-margin-top:80px}
+.hscroll{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:2px 16px 8px;scroll-snap-type:x proximity}
+.mini{flex:none;width:230px;scroll-snap-align:start;display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px;text-decoration:none;box-shadow:var(--shadow)}
+.mini .art{--paper:var(--surface-2);width:56px;height:56px;border-radius:10px;overflow:hidden;flex:none;background:var(--surface-2)}
+.mini div:last-child{min-width:0;flex:1}
+.mini b{display:block;font-size:calc(14px*var(--fs));line-height:1.25}
+.mini small{display:block;font-size:max(12px,calc(12px*var(--fs)));color:var(--muted);margin-top:2px}
+.mini .bar{margin-top:6px}
+.card{position:relative}
+.card .tag-new{position:absolute;top:8px;left:8px}
+.medal{position:absolute;top:6px;right:8px;font-size:22px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
+@media (max-width:600px){
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .card{padding:12px}
+  .card-art{height:78px;margin:-12px -12px 10px}
+  .card .koT{font-size:calc(19px*var(--fs))}
+  .card .enT{font-size:calc(14px*var(--fs));line-height:1.3}
+  .area{margin-top:24px}
+}
+
+/* ── module page: topic tabs, one topic at a time ── */
+.tabs{position:sticky;top:calc(60px + env(safe-area-inset-top));z-index:10;margin:14px -16px 0;padding:9px 16px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.tab{flex:none;height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);font-weight:600;font-size:max(12px,calc(13.5px*var(--fs)));display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.tab em{font-style:normal;font-weight:600;color:var(--muted);font-size:max(12px,calc(12px*var(--fs)))}
+.tab.done em{color:var(--jade)}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.tab[aria-selected="true"] em{color:inherit;opacity:.75}
+.tools{display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.tools .grow{flex:1}
+.group{margin-top:16px}
+.pager{display:flex;gap:10px;margin-top:18px}
+.pager .btn{flex:1;min-width:0;height:auto;min-height:50px;padding:8px 14px;white-space:normal;line-height:1.25;text-align:center;border-radius:14px;font-size:calc(15px*var(--fs))}
+.keys{margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.keys h3{display:flex;align-items:baseline;gap:10px;margin:0;padding:13px 16px;font-size:calc(16px*var(--fs))}
+.keys h3 span{font:500 calc(16px*var(--fs)) var(--ko-serif);color:var(--muted)}
+.keys h3 em{margin-left:auto;font-style:normal;font-size:max(12px,calc(12px*var(--fs)));color:var(--muted);font-weight:500}
+@media (max-width:600px){
+  /* phrase cards stack: English, then Korean full width, then tip, then level + buttons */
+  .row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"en en" "ko ko" "note note" "meta acts";gap:0 12px;padding:14px}
+  .row .en{display:contents}
+  .row .en-t{grid-area:en;margin:0}
+  .row .ko{grid-area:ko;margin:8px -4px 0}
+  .row .note{grid-area:note}
+  .row .en>.meta{grid-area:meta;align-self:center;margin-top:10px}
+  .row .acts{grid-area:acts;display:flex;flex-direction:row;margin-top:10px;gap:8px}
+  .row .ic{width:40px;height:40px;border-radius:12px}
+  .en-t{font-size:calc(15.5px*var(--fs))}
+  .c b{font-size:calc(22px*var(--fs))}
+}
+
+/* ── me: level, streak, badges ── */
+.me-card{display:flex;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow);margin-top:18px}
+.lv{flex:none;width:76px;height:76px;border-radius:22px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;text-align:center;line-height:1}
+.lv small{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;opacity:.85}
+.lv b{display:block;font-size:34px;font-weight:700;margin-top:2px}
+.me-id{min-width:0;flex:1}
+.me-id .koT{font:600 calc(24px*var(--fs))/1.15 var(--ko-serif)}
+.me-id .enT{font-weight:600;font-size:calc(15px*var(--fs))}
+.me-id small{display:block;font-size:max(12px,calc(13px*var(--fs)));color:var(--muted);margin-top:6px}
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.stats3 div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center}
+.stats3 b{display:block;font-size:calc(22px*var(--fs));letter-spacing:-.02em}
+.stats3 small{display:block;font-size:max(12px,calc(12.5px*var(--fs)));color:var(--muted)}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{text-align:center}
+.day i{display:grid;place-items:center;aspect-ratio:1;max-width:46px;margin:0 auto;border-radius:50%;background:var(--surface-2);color:var(--muted);font-style:normal;font-weight:700;font-size:14px}
+.day.ok i{background:var(--jade);color:#fff}
+.day.today i{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
+.day small{display:block;margin-top:6px;font-size:12px;color:var(--muted);font-weight:600}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.badge{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.badge span{display:block;font-size:30px;line-height:1.1}
+.badge b{display:block;font-size:calc(14px*var(--fs));margin-top:6px}
+.badge small{display:block;font-size:max(12px,calc(12px*var(--fs)));color:var(--muted);margin-top:2px}
+.badge.off{opacity:.5}
+.badge.off span{filter:grayscale(1)}
+.mrow{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--line);text-decoration:none}
+.mrow:first-child{border-top:0}
+.mrow b{flex:1;min-width:0;font-size:calc(14.5px*var(--fs));font-weight:600}
+.mrow span{font-size:20px;letter-spacing:2px;white-space:nowrap}
+.mrow span u{text-decoration:none;opacity:.22;filter:grayscale(1)}
+.mrow em{font-style:normal;font-size:max(12px,calc(13px*var(--fs)));color:var(--muted);min-width:3em;text-align:right}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:70;overflow:hidden}
+.confetti i{position:absolute;top:-24px;width:9px;height:14px;border-radius:2px;animation:fall 1.6s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(600deg)}}
+</style>
+<link rel="stylesheet" href="lib/games.css">
+<link rel="stylesheet" href="lib/motion.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#/" aria-label="Korean Talk home"><span class="seal">말</span><b>Korean Talk</b></a>
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search English or 한국어" autocomplete="off" aria-label="Search phrases">
+    </label>
+    <button class="icon-btn" id="themeBtn" aria-label="Switch light / dark mode"></button>
+    <button class="icon-btn" id="gear" aria-label="Settings">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="bgart art" id="bgart"></div>
+<main id="app" class="wrap"></main>
+<footer>Romanization is generated automatically and follows how words sound. Trust the audio over the letters.</footer>
+
+<div class="fabs">
+  <button class="fab round" id="fabTop" aria-label="Back to top" hidden><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6 11l6-6 6 6"/></svg></button>
+  <button class="fab next" id="fabNext" hidden></button>
+</div>
+<nav class="tabbar" id="tabbar" aria-label="Main">
+  <div class="tabbar-in">
+    <a class="tb" data-nav="home" href="#/"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+    <a class="tb" data-nav="play" href="#/play"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="11" rx="4"/><path d="M8 11v3M6.5 12.5h3M15.5 11.5h.01M17.5 13.5h.01"/></svg><span>Play</span></a>
+    <button class="tb tb-go" data-go="practice" aria-label="Practise now"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></i><span>Practise</span></button>
+    <a class="tb" data-nav="fav" href="#/m/fav"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.7 5.5 6 .9-4.4 4.2 1 6-5.3-2.8-5.3 2.8 1-6L3.3 9.9l6-.9z"/></svg><span>Saved</span><em id="tbFav"></em></a>
+    <a class="tb" data-nav="me" href="#/me"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>Me</span></a>
+  </div>
+</nav>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet" role="dialog" aria-label="Settings">
+  <h4>Display</h4>
+  <label class="opt switch">Show romanization <input type="checkbox" data-set="rom"></label>
+  <label class="opt switch">Motion <input type="checkbox" data-set="motion"></label>
+  <div class="opt">Home page
+    <div class="seg" id="homeSeg"><button data-home="map">Route</button><button data-home="cards">Cards</button></div>
+  </div>
+  <div class="opt">Text size
+    <div class="seg" id="fsSeg"><button data-fs="-1" aria-label="Smaller text">A−</button><span id="fsVal">100%</span><button data-fs="1" aria-label="Larger text">A+</button></div>
+  </div>
+  <div class="opt">Theme
+    <div class="seg" id="themeSeg"><button data-theme="auto">Auto</button><button data-theme="light">Light</button><button data-theme="dark">Dark</button></div>
+  </div>
+  <h4>Audio</h4>
+  <div class="opt">Voice
+    <div class="seg" id="engSeg"><button data-eng="online">Online</button><button data-eng="device">This device</button></div>
+  </div>
+  <label class="opt switch">Slow voice <input type="checkbox" data-set="slow"></label>
+  <label class="opt switch">Auto-play in practice <input type="checkbox" data-set="autoplay"></label>
+  <div class="voice" id="voiceName"></div>
+  <h4>Start again</h4>
+  <button class="danger" id="resetBtn">Reset progress<small>Back to Level 1. Keeps favourites, your own phrases and settings.</small></button>
+  <button class="danger" id="eraseBtn">Erase everything<small>Like a brand-new user: also removes favourites, your own phrases and settings.</small></button>
+</div>
+
+<div class="pr" id="pr" role="dialog" aria-label="Practice">
+  <div class="pr-art art" id="prArt"></div>
+  <div class="pr-top">
+    <button class="icon-btn" id="prClose" aria-label="Close practice"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <span class="count" id="prCount"></span>
+    <span class="grow"></span>
+    <div class="seg" id="dirSeg"><button data-dir="en">EN → 한</button><button data-dir="ko">한 → EN</button></div>
+  </div>
+  <div class="pr-prog"><i id="prBar"></i></div>
+  <div class="pr-body"><div class="flash" id="flash"></div></div>
+  <div class="pr-btns" id="prBtns"></div>
+  <div class="pr-hint">Space = show answer · 1 = again · 2 = got it · F = save to favourites</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="lib/hangul.js"></script>
+<script src="lib/art.js"></script>
+<script src="lib/icons.js"></script>
+<script>
+// Modules call KT.module({...}) when they load.
+window.KT = { modules: [], failed: [], areas: [], files: [], changelog: [],
+  module(def) { if (!this.modules.some(m => m.id === def.id)) this.modules.push(def); } };
+</script>
+<script src="modules/list.js"></script>
+<script src="data/places.js"></script>
+<script src="data/hangul.js"></script>
+<script src="data/scenes.js"></script>
+<script src="data/builder.js"></script>
+<script src="data/polite.js"></script>
+<script src="lib/games.js"></script>
+<script src="lib/motion.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* ───────────── storage ───────────── */
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+// iPhone mutes the built-in voice when the phone is on silent, so iPhones/iPads start on the online voice.
+const IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const S = Object.assign({ rom: true, home: "map", motion: true, slow: false, autoplay: true, theme: "auto", dir: "en", fs: 1, engine: IOS ? "online" : "device" }, store.get("kt_settings_v1", {}));
+// Text size steps for Settings → Text size. Every font size in the CSS is multiplied by --fs.
+const FS = [0.9, 1, 1.1, 1.2, 1.35, 1.5];
+const fsIndex = () => FS.reduce((best, v, i) => Math.abs(v - S.fs) < Math.abs(FS[best] - S.fs) ? i : best, 1);
+document.documentElement.style.setProperty("--fs", FS[fsIndex()]);
+// Motion has its own switch in Settings; it deliberately does not follow the system "reduce motion" setting.
+document.documentElement.classList.toggle("motion", S.motion !== false);
+const known = new Set(store.get("kt_known_v1", []));
+const saveS = () => store.set("kt_settings_v1", S);
+const saveKnown = () => store.set("kt_known_v1", [...known]);
+// Favourites: starred phrases and starred "Remember these" cards, saved on this device.
+const favs = new Set(store.get("kt_fav_v1", []));
+const favKeys = new Set(store.get("kt_favkeys_v1", []));
+const saveFavs = () => { store.set("kt_fav_v1", [...favs]); store.set("kt_favkeys_v1", [...favKeys]); };
+
+/* ───────────── game: daily goal, streak, points, levels, medals ─────────────
+   Points: 10 for every phrase marked known, 2 for every practice card answered, plus whatever the games award (G.bonus).
+   G.days["2026-10-04"] = [phrases learned that day, 1 if the daily goal was reached]. */
+const G = Object.assign({ days: {}, reviews: 0, bonus: 0, goal: 10 }, store.get("kt_game_v1", {}));
+const saveG = () => store.set("kt_game_v1", G);
+const dayKey = (d = new Date()) => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const today = () => G.days[dayKey()] || [0, 0];
+const countedToday = new Set();   // a phrase counts towards the goal once per visit, however often it is ticked
+function bump(id) {
+  if (countedToday.has(id)) return;
+  countedToday.add(id);
+  const k = dayKey(), d = G.days[k] || [0, 0];
+  d[0]++; if (d[0] >= G.goal) d[1] = 1;
+  G.days[k] = d; saveG();
+}
+function streak() {
+  const d = new Date(); let n = 0;
+  if (!today()[1]) d.setDate(d.getDate() - 1);   // today not finished yet: yesterday keeps the streak alive
+  while ((G.days[dayKey(d)] || [])[1]) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+function bestStreak() {
+  let best = 0, run = 0, prev = null;
+  Object.keys(G.days).sort().forEach(k => {
+    if (!G.days[k][1]) return;
+    const t = new Date(k + "T00:00:00").getTime();
+    run = prev != null && Math.round((t - prev) / 864e5) === 1 ? run + 1 : 1;
+    prev = t; best = Math.max(best, run);
+  });
+  return best;
+}
+const xp = () => known.size * 10 + G.reviews * 2 + (G.bonus || 0);
+// Level ladder: points needed, Korean title, English title.
+const LEVELS = [[0, "왕초보", "Total Beginner"], [50, "초보", "Beginner"], [150, "여행자", "Traveller"], [300, "단골", "Regular"], [500, "동네 주민", "Local"],
+  [800, "수다쟁이", "Chatterbox"], [1200, "인싸", "Insider"], [2000, "한국통", "Korea Expert"], [3500, "달인", "Master"], [6000, "고수", "Grandmaster"], [9000, "세종대왕", "King Sejong"]];
+function levelOf(x) {
+  let i = 0; while (i + 1 < LEVELS.length && x >= LEVELS[i + 1][0]) i++;
+  const nx = LEVELS[i + 1];
+  return { n: i + 1, ko: LEVELS[i][1], en: LEVELS[i][2], pct: nx ? (x - LEVELS[i][0]) / (nx[0] - LEVELS[i][0]) * 100 : 100,
+    next: nx ? { n: i + 2, ko: nx[1], en: nx[2], left: nx[0] - x } : null };
+}
+// Module medals: bronze at 25% known, silver at 50%, gold at 100%.
+const MEDAL = ["", "🥉", "🥈", "🥇"], MEDAL_NAME = ["", "Bronze", "Silver", "Gold"];
+function medal(m) { const n = m.items.length; if (!n) return 0; const r = knownIn(m.items) / n; return r >= 1 ? 3 : r >= 0.5 ? 2 : r >= 0.25 ? 1 : 0; }
+// Runs a change to progress, then celebrates anything it unlocked.
+function withRewards(p, change) {
+  const m = BY[p.mod], l0 = levelOf(xp()).n, m0 = m ? medal(m) : 0, g0 = today()[1];
+  change();
+  const l1 = levelOf(xp()), m1 = m ? medal(m) : 0, msgs = [];
+  if (!g0 && today()[1]) msgs.push(`Daily goal reached! 🔥 ${streak()}-day streak`);
+  if (l1.n > l0) msgs.push(`Level up! Lv ${l1.n} ${l1.ko} · ${l1.en}`);
+  if (m1 > m0) msgs.push(`${MEDAL[m1]} ${MEDAL_NAME[m1]} medal · ${m.title}`);
+  if (msgs.length) { confetti(); toast(msgs.join("  ·  "), 4500); }
+}
+// Points and daily-goal credit earned in the games (n = how many answers count towards today's goal).
+function award(pts, n) {
+  const l0 = levelOf(xp()).n, g0 = today()[1];
+  G.bonus = (G.bonus || 0) + pts;
+  const k = dayKey(), d = G.days[k] || [0, 0];
+  d[0] += n || 0; if (d[0] >= G.goal) d[1] = 1;
+  G.days[k] = d; saveG();
+  const l1 = levelOf(xp()), msgs = [];
+  if (!g0 && today()[1]) msgs.push(`Daily goal reached! 🔥 ${streak()}-day streak`);
+  if (l1.n > l0) msgs.push(`Level up! Lv ${l1.n} ${l1.ko} · ${l1.en}`);
+  if (msgs.length) { confetti(); toast(msgs.join("  ·  "), 4500); }
+}
+/* ───────────── spaced repetition ─────────────
+   Each "Got it" moves a phrase up a box; the higher the box, the longer before it comes back.
+   SRS[id] = [box, day number it is next due]. "Again" sends it back to the first box, due today. */
+const SRS = store.get("kt_srs_v1", {}), GAPS = [1, 3, 7, 14, 30, 60];
+const saveSRS = () => store.set("kt_srs_v1", SRS);
+const dayNo = () => Math.floor((Date.now() - new Date().getTimezoneOffset() * 6e4) / 864e5);
+function srsGot(id) { const b = SRS[id] ? Math.min(SRS[id][0] + 1, GAPS.length - 1) : 0; SRS[id] = [b, dayNo() + GAPS[b]]; saveSRS(); }
+function srsAgain(id) { SRS[id] = [0, dayNo()]; saveSRS(); }
+const dueItems = () => ALL.filter(p => SRS[p.id] && SRS[p.id][1] <= dayNo());
+function confetti() {
+  if (S.motion === false) return;
+  const box = document.createElement("div"), cols = ["var(--accent)", "var(--jade)", "var(--amber)", "var(--t4)", "var(--t2)"];
+  box.className = "confetti";
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement("i");
+    s.style.cssText = `left:${Math.random() * 100}%;background:${cols[i % cols.length]};animation-delay:${Math.random() * 0.5}s;animation-duration:${1.2 + Math.random()}s`;
+    box.appendChild(s);
+  }
+  document.body.appendChild(box); setTimeout(() => box.remove(), 2800);
+}
+
+/* ───────────── helpers ───────────── */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const hash = s => { let h = 5381; for (let i = 0; i < s.length; i++) h = (h * 33) ^ s.charCodeAt(i); return (h >>> 0).toString(36); };
+const LV = { E: "Easy", M: "Medium", H: "Hard" };
+const fmt = n => n.toLocaleString("en");
+const strip = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const ICON = {
+  say: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+  tick: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  star: '<svg class="star-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3.5l2.7 5.5 6 .9-4.4 4.2 1 6-5.3-2.8-5.3 2.8 1-6L3.3 9.9l6-.9z"/></svg>',
+  right: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+  down: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+  back: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>',
+  play: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>'
+};
+function toast(msg, ms) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), ms || 2600); }
+
+/* ───────────── parsing ─────────────
+   Line:  Level | English | 한국어 | note | tags        "# Title | 제목 | 🙂" = group (the emoji is its picture)
+   단어[rom] after a word fixes its romanization. Tags are for slang: see modules/_template.js. */
+function parseTags(text) {
+  const t = {};
+  String(text || "").split(";").map(x => x.trim()).filter(Boolean).forEach(x => {
+    const i = x.indexOf("=");
+    if (i > 0) t[x.slice(0, i)] = x.slice(i + 1);
+    else if (/^(classic|\d{4}s?)$/.test(x)) t.era = x;
+    else t[x] = true;
+  });
+  return t;
+}
+function parsePhrases(modId, text) {
+  const groups = []; let g = null;
+  String(text || "").split("\n").forEach(raw => {
+    const line = raw.trim();
+    if (!line || line.startsWith("//")) return;
+    if (line.startsWith("#")) {
+      const [t, z, ic] = line.slice(1).split("|").map(s => s.trim());
+      g = { title: t || "Phrases", ko: z || "", icon: ic || "", items: [] }; groups.push(g); return;
+    }
+    const parts = line.split("|").map(s => s.trim());
+    let lvl = "M";
+    if (/^[EMH]$/i.test(parts[0])) lvl = parts.shift().toUpperCase();
+    const [en, koRaw, note, tagText] = parts;
+    if (!en || !koRaw) return;
+    let ko = "", ov = {};
+    for (let i = 0; i < koRaw.length; i++) {
+      if (koRaw[i] === "[") { const j = koRaw.indexOf("]", i); if (j > i) { ov[ko.length - 1] = koRaw.slice(i + 1, j).trim(); i = j; continue; } }
+      ko += koRaw[i];
+    }
+    if (!g) { g = { title: "Phrases", ko: "", items: [] }; groups.push(g); }
+    const tags = parseTags(tagText);
+    g.items.push({ id: modId + "-" + hash(ko), mod: modId, en, ko, ov, lvl, note: note || "", group: g.title, tags, say: tags.say || ko,
+      icon: tags.i || KTIcon(en) || g.icon || "", heard: !!tags.hear });
+  });
+  return groups;
+}
+function buildModule(def) {
+  const groups = parsePhrases(def.id, def.phrases);
+  return Object.assign({}, def, { groups, items: groups.flatMap(g => g.items) });
+}
+
+/* ───────────── romanization ─────────────
+   Each Korean word becomes a cell with its romanization underneath; digits and loose punctuation get an empty one.
+   sp = a space came before it. */
+function cells(p) {
+  if (p._cells) return p._cells;
+  const out = [], re = /([가-힣]+)|(\s+)|([^가-힣\s]+)/g;
+  let m, sp = false;
+  while ((m = re.exec(p.ko))) {
+    if (m[2]) { sp = true; continue; }
+    // closing punctuation stays on the word it follows, so it never drifts away from it
+    if (m[3] && !sp && out.length && out[out.length - 1].rom && /^[.,!?…~]+$/.test(m[3])) { out[out.length - 1].ch += m[3]; continue; }
+    out.push({ ch: m[0], rom: m[1] ? (p.ov && p.ov[m.index + m[1].length - 1]) || KHangul.rom(m[1]) : "", sp });
+    sp = false;
+  }
+  p._cells = out;
+  return out;
+}
+const romText = p => cells(p).map(c => c.rom).filter(Boolean).join(" ");
+function koHTML(p) {
+  return cells(p).map(c => `<span class="c${c.sp ? " sp" : ""}${c.rom ? "" : " x"}"><b>${esc(c.ch)}</b><i>${esc(c.rom)}</i></span>`).join("");
+}
+
+// Korean inside ordinary text (the "Remember these" cards): every word gets its romanization underneath,
+// the same way phrases do. 단어[rom] fixes a reading, as in phrase lines.
+function koInline(text) {
+  const re = /([가-힣]+)(?:\[([^\]]*)\])?([.,!?…]*)/g;   // closing punctuation stays inside the cell, next to its word
+  const parts = [];   // plain text and word cells, in order
+  let last = 0, m, run = null;
+  while ((m = re.exec(text))) {
+    const gap = text.slice(last, m.index);
+    // words separated only by a space belong to one phrase, which is what gets read out when any of them is tapped
+    if (!run || !/^\s+$/.test(gap) || /[.!?…]$/.test(run.end)) run = { words: [] };
+    run.words.push(m[1] + m[3]); run.end = m[3];
+    parts.push(esc(gap), { word: m[1] + m[3], rom: m[2] || KHangul.rom(m[1]), run });
+    last = m.index + m[0].length;
+  }
+  return parts.map(p => typeof p === "string" ? p
+    : `<span class="c" data-say="${esc(p.run.words.join(" "))}"${tipOf("hearWord")}><b>${p.word}</b><i>${esc(p.rom)}</i></span>`).join("") + esc(text.slice(last));
+}
+
+/* ───────────── speech ───────────── */
+let voice = null, warnedVoice = false, playingBtn = null;
+function pickVoice() {
+  if (!("speechSynthesis" in window)) return;
+  const vs = speechSynthesis.getVoices();
+  voice = vs.find(v => /^ko/i.test(v.lang) && /yuna|유나|sunhi|sun-hi|선히|injoon|google/i.test(v.name))
+       || vs.find(v => /^ko/i.test(v.lang)) || null;
+  const el = $("#voiceName");
+  if (el) el.textContent = S.engine === "online"
+    ? "Online voice plays even when your iPhone is on silent. Needs internet. It uses Google Translate's free voice, which could change without notice — if it stops working, switch to \"This device\"."
+    : (voice ? `Using ${voice.name} (${voice.lang}). Works offline. iPhone mutes this voice when the phone is on silent.` : (vs.length ? "No Korean voice found on this device." : "Works offline. iPhone mutes this voice when the phone is on silent."));
+}
+if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+// Two voices: "online" plays a short audio clip (plays even when an iPhone is on silent, needs internet);
+// "device" uses the phone/computer's built-in speech (works offline, but iPhone mutes it on silent).
+const clip = new Audio();
+try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch (e) {}
+const onlineUrl = t => "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ko&q=" + encodeURIComponent(t.slice(0, 190));
+function stopAudio() {
+  try { clip.pause(); } catch (e) {}
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  if (playingBtn) playingBtn.classList.remove("playing");
+}
+function speak(text, btn) {
+  stopAudio();
+  if (btn) { btn.classList.add("playing"); playingBtn = btn; }
+  const done = () => { if (btn) btn.classList.remove("playing"); };
+  if (S.engine === "online" && navigator.onLine !== false) {
+    clip.onended = done;
+    clip.onerror = () => { done(); toast("The online voice didn't load. Check your internet, or pick \"This device\" voice in settings."); };
+    clip.src = onlineUrl(text);
+    clip.defaultPlaybackRate = clip.playbackRate = S.slow ? 0.7 : 1;
+    clip.play().catch(err => { if (err && err.name !== "AbortError") clip.onerror(); });
+    return;
+  }
+  if (!("speechSynthesis" in window)) { done(); toast("This browser can't play audio. Try the online voice in settings."); return; }
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ko-KR"; if (voice) u.voice = voice;
+  u.rate = S.slow ? 0.6 : 0.9;
+  u.onend = u.onerror = done;
+  speechSynthesis.speak(u);
+  if (!voice && !warnedVoice && speechSynthesis.getVoices().length) { warnedVoice = true; toast("No Korean voice on this device. Try the online voice in settings."); }
+}
+
+/* ───────────── data ───────────── */
+let MODS = [], BY = {}, ALL = [], MINE = null;
+function loadMine() {
+  MINE = buildModule({ id: "mine", area: "mine", title: "My Phrases", ko: "내 문장", phrases: store.get("kt_mine_v1", "") });
+}
+function rebuildIndex() {
+  BY = {}; MODS.forEach(m => BY[m.id] = m); BY.mine = MINE;
+  ALL = MODS.flatMap(m => m.items).concat(MINE.items);
+}
+// Favourites behave like a module, built fresh each time from what is starred.
+function keysOf(m) {
+  return String(m.keys || "").split("\n").map(l => l.trim()).filter(l => l && !l.startsWith("//")).map(l => {
+    const i = l.indexOf("|"), t = i < 0 ? "" : l.slice(0, i).trim(), b = i < 0 ? l : l.slice(i + 1).trim();
+    const plain = s => s.replace(/([가-힣])\[[^\]]*\]/g, "$1");   // the id ignores 단어[rom] fixes, so adding one never un-saves a card
+    return { id: m.id + "~" + hash(plain(t) + "|" + plain(b)), mod: m.id, t, b };
+  });
+}
+function buildFav() {
+  const groups = MODS.concat(MINE).map(m => ({ title: m.title, ko: m.ko, items: m.items.filter(p => favs.has(p.id)) })).filter(g => g.items.length);
+  return { id: "fav", area: "mine", title: "Favourites", ko: "즐겨찾기", art: "lanterns", groups, items: groups.flatMap(g => g.items),
+    keyList: MODS.flatMap(keysOf).filter(k => favKeys.has(k.id)) };
+}
+const knownIn = items => items.reduce((n, p) => n + (known.has(p.id) ? 1 : 0), 0);
+const isNew = m => m.added && (Date.now() - new Date(m.added + "T00:00:00").getTime()) < 30 * 864e5;
+
+/* ───────────── art ───────────── */
+const art = (mod, opt) => window.KTArt ? KTArt.scene(KTArt.pick(mod), opt) : "";
+// A place's picture: a few emoji on a tinted backdrop. Used on the home route, module pages and conversations.
+const dioHTML = (pl, cls) => `<div class="dio${cls ? " " + cls : ""}" style="--h:${pl.hue}" aria-hidden="true">${pl.scene.map((e, i) => `<span class="d${i + 1}">${e}</span>`).join("")}</div>`;
+const placeOf = modId => (KT.places || []).find(pl => pl.mods.includes(modId));
+// Explanations come at two depths. tip(): a few words on hover, or when the ⓘ beside it is tapped.
+const tipAttr = (title, text) => text ? ` data-tip="${esc(title + "|" + text)}"` : "";
+const tipOf = key => { const t = (KT.tips || {})[key]; return t ? ` data-tip="${esc(t)}"` : ""; };
+const IB = '<button class="ib" data-tipbtn aria-label="What is this?">i</button>';
+// guideHTML(): the longer version, as a panel inside the section. Open the first time; after that it remembers.
+const guideShut = store.get("kt_guide_v1", {});
+function guideHTML(id, label, guide) {
+  if (!guide || !guide.length) return "";
+  return `<details class="guide" data-guide="${esc(id)}"${guideShut[id] ? "" : " open"}><summary><span class="ib" aria-hidden="true">i</span><b>${esc(label)}</b><em>how this helps your Korean</em>${ICON.down}</summary>
+    <p class="hear-hint">🔊 Tap any Korean word to hear it.</p>
+    <div class="guide-grid">${guide.map(g => `<div><h4>${esc(g[0])}</h4><p>${koInline(g[1])}</p></div>`).join("")}</div></details>`;
+}
+
+/* ───────────── views ───────────── */
+const app = $("#app");
+const view = { level: "all", hideKnown: false };
+
+// Slang tags: when it took off, who it is safe with, and whether it is still in use.
+function tagsHTML(p) {
+  const t = p.tags || {}, out = [];
+  if (p.heard) out.push(`<span class="tg hear"${tipOf("hear")}>👂 Said to you</span>`);
+  if (t.new && Date.now() - new Date(t.new + "T00:00:00").getTime() < 21 * 864e5) out.push('<span class="tg new">New</span>');
+  if (t.era) out.push(`<span class="tg"${tipOf("era")}>${t.era === "classic" ? "Classic" : esc(t.era)}</span>`);
+  if (t.safe) out.push(`<span class="tg ok"${tipOf("safe")}>Anyone</span>`);
+  if (t.friends) out.push(`<span class="tg"${tipOf("friends")}>Friends only</span>`);
+  if (t.text) out.push(`<span class="tg"${tipOf("text")}>Text only</span>`);
+  if (t.dated) out.push(`<span class="tg warn"${tipOf("dated")}>Dated</span>`);
+  if (t.check) out.push(`<span class="tg warn"${tipOf("check")}>Unconfirmed</span>`);
+  if (t.src) out.push(`<a class="tg" href="${esc(t.src)}" target="_blank" rel="noopener">Source ↗</a>`);
+  return out.join("");
+}
+function rowHTML(p, showMod) {
+  const k = known.has(p.id);
+  return `<article class="row${k ? " is-known" : ""}${p.heard ? " heard" : ""}" data-id="${p.id}">
+    <div class="en">
+      <p class="en-t">${p.icon ? `<span class="pi"${tipOf("pic")}>${p.icon}</span>` : ""}<span>${esc(p.en)}</span></p>
+      <div class="meta"><span class="lvl ${p.lvl}"${tipOf("level")}>${LV[p.lvl]}</span>${tagsHTML(p)}${showMod ? `<span class="mod-label">${esc(BY[p.mod].title)} · ${esc(p.group)}</span>` : ""}</div>
+      ${p.note ? `<div class="note" style="margin-top:6px">${esc(p.note)}</div>` : ""}
+    </div>
+    <button class="ko" data-act="say" aria-label="Play ${esc(p.ko)}"${tipOf("rom")}>${koHTML(p)}</button>
+    <div class="acts">
+      <button class="ic say" data-act="say" aria-label="Play audio">${ICON.say}</button>
+      <button class="ic tick" data-act="known" aria-pressed="${k}" aria-label="Mark as known">${ICON.tick}</button>
+      <button class="ic star" data-act="fav" aria-pressed="${favs.has(p.id)}" aria-label="Save to favourites">${ICON.star}</button>
+    </div>
+  </article>`;
+}
+
+// Home as a route: one stop per place, with its picture, what you can do there and how far along you are.
+function stopHTML(pl, i) {
+  const mods = pl.mods.map(id => BY[id]).filter(Boolean), items = mods.flatMap(m => m.items);
+  if (!mods.length) return "";
+  const play = window.KTGames ? KTGames.progress() : { scenes: {} };
+  const scenes = (pl.scenes || []).map(id => (KT.scenes || []).find(x => x.id === id)).filter(Boolean);
+  // a finished conversation counts like ten phrases
+  const total = items.length + scenes.length * 10, got = knownIn(items) + scenes.filter(x => play.scenes[x.id]).length * 10;
+  const pct = total ? Math.round(got / total * 100) : 0;
+  const link = (href, icon, title, sub, tip) => `<a class="sl" href="${href}"${tip}><span>${icon}</span><div><b>${esc(title)}</b><small>${sub}</small></div>${ICON.right}</a>`;
+  const games = (pl.games || []).map(id => { const g = window.KTGames && KTGames.game(id); return g ? link("#/" + id, g.icon, g.title, g.status || esc(g.about), tipAttr(g.title, g.tip)) : ""; }).join("");
+  const links = (pl.gamesFirst ? games : "")
+    + mods.map(m => link("#/m/" + m.id, "📖", m.title, `${knownIn(m.items)} of ${m.items.length} phrases`, tipOf("phrases"))).join("")
+    + scenes.map(x => link("#/scenes/" + x.id, "💬", x.title, play.scenes[x.id] ? "⭐".repeat(play.scenes[x.id]) + " · play again" : "Conversation", tipOf("talk"))).join("")
+    + (pl.gamesFirst ? "" : games);
+  return `<section class="stop${pct >= 100 ? " done" : ""}" data-sec>
+    <div class="stop-n">${pct >= 100 ? "✓" : i + 1}</div>
+    <div class="stop-card">
+      <div class="stop-top"${tipAttr(pl.title + " · " + pl.ko, pl.tip)}>
+        <a href="#/m/${mods[0].id}" aria-label="${esc(pl.title)}">${dioHTML(pl)}</a>
+        <div class="stop-body"><h3>${esc(pl.title)} <span>${esc(pl.ko)}</span>${pl.tip ? IB : ""}<em data-count="${pct}" data-suffix="%">${pct}%</em></h3><p>${esc(pl.about)}</p>
+          <div class="bar"><i style="width:${pct}%"></i></div></div>
+      </div>
+      <div class="sls">${links}</div>
+    </div></section>`;
+}
+function renderHome() {
+  document.title = "Korean Talk";
+  view.mod = null; view.tabs = null;
+  const t = today(), st = streak(), lv = levelOf(xp()), left = Math.max(0, G.goal - t[0]);
+  const last = BY[store.get("kt_last_v1", "")];
+  const news = KT.changelog[0];
+  // goal banner
+  const due = dueItems().length;
+  let h = `<h1 class="hello">A little Korean, every day. <span>매일 조금씩.</span></h1>
+  <section class="goal"${tipOf("goal")}>
+    <div class="art goal-art">${art({ id: "home" })}</div>
+    <div class="ring" style="--p:${Math.min(100, t[0] / G.goal * 100)}"><div><b data-count="${t[0]}">${t[0]}</b><small>of ${G.goal}</small></div></div>
+    <div class="goal-txt">
+      <div class="goal-h">${t[1] ? "Goal reached today! 🎉" : t[0] ? `${left} more to hit today's goal` : `Today's goal: ${G.goal} cards`}</div>
+      <div class="pills"><span class="pill${st ? " hot" : ""}">🔥 ${st ? st + "-day streak" : "Start a streak"}</span><a class="pill" href="#/me">Lv ${lv.n} ${lv.ko}</a><span class="pill">${fmt(xp())} pts</span>${due ? `<span class="pill">🔁 ${due} to review</span>` : ""}</div>
+      <div class="goal-btns"><button class="btn primary small" data-act="daily">${ICON.play} ${t[0] ? "Keep going" : "Start practising"}</button></div>
+    </div>
+  </section>`;
+  const map = S.home !== "cards" && (KT.places || []).length;
+  if (window.KTGames) h += map ? KTGames.starterHTML() : KTGames.homeHTML();
+  if (KT.failed.length) h += `<div class="warn">Couldn't load: ${KT.failed.map(esc).join(", ")}. Check the file names in modules/list.js.</div>`;
+
+  if (map) {
+    h += `<section class="area" data-sec><h2>Your route <span>서울 한 바퀴</span><em>${KT.places.length} stops</em></h2><div class="route">${KT.places.map(stopHTML).join("")}</div></section>`;
+    if (window.KTGames) h += KTGames.playRowHTML();
+    h += `<section class="area" data-sec><h2>Your own <span>내 것</span></h2><div class="cards">${cardHTML(buildFav(), "fav")}${cardHTML(MINE, "mine")}</div></section>`;
+    if (news) h += `<div class="news"><b>New</b><span>${esc(news.text)}</span></div>`;
+    app.innerHTML = h;
+    return;
+  }
+  // category chips, like the category row in a shopping app
+  const other = MODS.some(m => !KT.areas.find(a => a.id === m.area));
+  const areas = KT.areas.concat(other ? [{ id: "_other", title: "More", ko: "기타" }] : []).map(a => ({ a,
+    mods: MODS.filter(m => a.id === "_other" ? !KT.areas.find(x => x.id === m.area) : m.area === a.id) })).filter(x => x.mods.length);
+  const cat = view.cat && (view.cat === "mine" || areas.some(x => x.a.id === view.cat)) ? view.cat : "all";
+  h += `<div class="chips">${[{ id: "all", title: "All" }].concat(areas.map(x => x.a), [{ id: "mine", title: "Mine" }])
+    .map(c => `<button class="chip" data-cat="${c.id}" aria-pressed="${c.id === cat}">${esc(c.title)}</button>`).join("")}</div>`;
+
+  // jump back in: modules already started, most recent first
+  const going = MODS.filter(m => m === last || (knownIn(m.items) && knownIn(m.items) < m.items.length)).sort((a, b) => (b === last) - (a === last));
+  if (cat === "all" && going.length) {
+    h += `<section class="area" data-sec><h2>Jump back in <span>이어서 하기</span></h2><div class="hscroll">${going.map(m => {
+      const n = m.items.length, k = knownIn(m.items);
+      return `<a class="mini" href="#/m/${m.id}"><div class="art">${art(m)}</div><div><b>${esc(m.title)}</b><small>${k} of ${n} known</small><div class="bar"><i style="width:${n ? k / n * 100 : 0}%"></i></div></div></a>`;
+    }).join("")}</div></section>`;
+  }
+  areas.forEach(({ a, mods }) => {
+    if (cat !== "all" && cat !== a.id) return;
+    const n = mods.reduce((s, m) => s + m.items.length, 0);
+    h += `<section class="area" data-sec><h2>${esc(a.title)} <span>${esc(a.ko || "")}</span><em>${fmt(n)} phrases</em></h2><div class="cards">${mods.map(m => cardHTML(m)).join("")}</div></section>`;
+  });
+  if (cat === "all" || cat === "mine") h += `<section class="area" data-sec><h2>Your own <span>내 것</span></h2><div class="cards">${cardHTML(buildFav(), "fav")}${cardHTML(MINE, "mine")}</div></section>`;
+  if (news) h += `<div class="news"><b>New</b><span>${esc(news.text)}</span></div>`;
+  app.innerHTML = h;
+}
+function cardHTML(m, kind) {
+  const n = m.items.length, k = knownIn(m.items), mine = !!kind, nk = (m.keyList || []).length, md = mine ? 0 : medal(m);
+  const meta = kind === "fav" ? (n || nk ? `${n} phrase${n === 1 ? "" : "s"} · ${nk} card${nk === 1 ? "" : "s"} saved` : "Tap ☆ on anything to save it here")
+    : kind === "mine" ? (n ? `${n} phrases you added` : "Add your own phrases") : `${n} phrases · ${m.groups.length} topics`;
+  return `<a class="card${mine ? " mine" : ""}" href="#/m/${m.id}">
+    <div class="art card-art">${art(m)}</div>
+    ${isNew(m) ? '<span class="tag-new">New</span>' : ""}${md ? `<span class="medal" title="${MEDAL_NAME[md]} medal">${MEDAL[md]}</span>` : ""}
+    <div class="koT">${esc(m.ko)}</div>
+    <div class="enT">${esc(m.title)}</div>
+    <div class="meta">${meta}</div>
+    ${n ? `<div class="bar"><i style="width:${k / n * 100}%"></i></div><div class="foot"><span>${k} known</span><span>${Math.round(k / n * 100)}%</span></div>` : ""}
+  </a>`;
+}
+
+// "Me" page: level, streak, this week, daily goal, badges, module medals.
+function renderMe() {
+  document.title = "Me · Korean Talk";
+  view.mod = null; view.tabs = null;
+  const x = xp(), lv = levelOf(x), st = streak(), bs = bestStreak(), kn = known.size, nf = favs.size + favKeys.size;
+  const golds = MODS.filter(m => medal(m) === 3).length, pri = MODS.filter(m => m.area === (KT.areas[0] || {}).id);
+  const now = new Date(), mon = new Date(now); mon.setDate(now.getDate() - (now.getDay() + 6) % 7);
+  const week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((lab, i) => {
+    const d = new Date(mon); d.setDate(mon.getDate() + i);
+    const r = G.days[dayKey(d)] || [0, 0];
+    return `<div class="day${r[1] ? " ok" : ""}${dayKey(d) === dayKey() ? " today" : ""}"><i>${r[1] ? "✓" : r[0] || ""}</i><small>${lab}</small></div>`;
+  }).join("");
+  const badges = [
+    ["🌱", "First steps", "Know 10 phrases", kn >= 10], ["📚", "Bookworm", "Know 50 phrases", kn >= 50], ["💯", "Hundred club", "Know 100 phrases", kn >= 100],
+    ["🚀", "Taking off", "Know 200 phrases", kn >= 200], ["🏆", "Conversationalist", "Know 350 phrases", kn >= 350], ["👑", "Phrasebook cleared", "Know every phrase", ALL.length > 0 && kn >= ALL.length],
+    ["🔥", "On a roll", "3-day streak", bs >= 3], ["⚡", "Full week", "7-day streak", bs >= 7], ["🌙", "Monthly habit", "30-day streak", bs >= 30],
+    ["⭐", "Collector", "Save 10 favourites", nf >= 10], ["🥇", "Gold standard", "Finish a whole module", golds >= 1],
+    ["🎖", "Foundations laid", "Gold in every Start here module", pri.length > 0 && pri.every(m => medal(m) === 3)]
+  ];
+  app.innerHTML = `<div class="me-card">
+      <div class="lv"><div><small>LEVEL</small><b>${lv.n}</b></div></div>
+      <div class="me-id"><div class="koT">${lv.ko}</div><div class="enT">${lv.en}</div>
+        <div class="bar"><i style="width:${lv.pct}%"></i></div>
+        <small>${fmt(x)} pts${lv.next ? ` · ${fmt(lv.next.left)} more to Lv ${lv.next.n} ${lv.next.ko} ${lv.next.en}` : " · top level reached"}</small></div>
+    </div>
+    <div class="stats3"><div><b>🔥 ${st}</b><small>day streak</small></div><div><b>${fmt(kn)}</b><small>phrases known</small></div><div><b>🥇 ${golds}</b><small>gold medals</small></div></div>
+    <section class="area" data-sec><h2>This week <span>이번 주</span><em>best streak ${bs} day${bs === 1 ? "" : "s"}</em></h2><div class="week">${week}</div></section>
+    <section class="area" data-sec><h2>Daily goal <span>하루 목표</span></h2>
+      <div class="seg" id="goalSeg">${[5, 10, 20].map(g => `<button data-goal="${g}" aria-pressed="${G.goal === g}">${g} a day</button>`).join("")}</div>
+      <p class="section-note">Mark phrases as known (✓), press "Got it" in practice, or answer correctly in any game. Reach the goal each day to keep your streak. Today: ${today()[0]} of ${G.goal}.</p></section>
+    <section class="area" data-sec><h2>Badges <span>배지</span><em>${badges.filter(b => b[3]).length} of ${badges.length}</em></h2>
+      <div class="badges">${badges.map(b => `<div class="badge${b[3] ? "" : " off"}"><span>${b[0]}</span><b>${b[1]}</b><small>${b[2]}</small></div>`).join("")}</div></section>
+    <section class="area" data-sec><h2>Module medals <span>메달</span></h2>
+      <div class="list">${MODS.map(m => { const md = medal(m), n = m.items.length;
+        return `<a class="mrow" href="#/m/${m.id}"><b>${esc(m.title)}</b><span>${[1, 2, 3].map(i => i <= md ? MEDAL[i] : `<u>${MEDAL[i]}</u>`).join("")}</span><em>${n ? Math.round(knownIn(m.items) / n * 100) : 0}%</em></a>`; }).join("")}</div>
+      <p class="section-note">Bronze at 25% of a module known, silver at 50%, gold at 100%. Points: 10 for each phrase you know, 2 for each practice card or right answer in a game.</p></section>
+    <div class="mbtns" style="margin-top:22px"><button class="btn ghost" data-act="settings">Settings</button><a class="btn ghost" href="#/m/fav">★ Favourites${nf ? " · " + nf : ""}</a></div>`;
+}
+
+function visible(items) {
+  return items.filter(p => (view.level === "all" || p.lvl === view.level) && !(view.hideKnown && known.has(p.id)));
+}
+// Module page: one topic at a time, picked from a row of tabs, so there is never a 100-phrase scroll.
+// Tabs: "Remember" cards, then each topic, then "All topics". The tab last used in a module is remembered.
+const tabState = store.get("kt_tab_v1", {});
+function tabsOf(m, keyList) {
+  const fav = m.id === "fav", t = [];
+  if (fav && m.items.length + keyList.length) t.push({ id: "all", label: "All" });
+  if (keyList.length) t.push({ id: "keys", label: fav ? "Saved cards" : "💡 Remember", n: keyList.length });
+  m.groups.forEach((g, i) => t.push({ id: String(i), label: g.title, g }));
+  if (!fav && m.groups.length > 1) t.push({ id: "all", label: "All topics" });
+  return t;
+}
+function tabsHTML() {
+  return view.tabs.map(t => {
+    const g = t.g, k = g ? knownIn(g.items) : 0, done = g && g.items.length && k === g.items.length;
+    return `<button class="tab${done ? " done" : ""}" role="tab" data-tab="${t.id}" aria-selected="${t.id === view.tab}"${t.id === "keys" ? tipOf("remember") : ""}>${esc(t.label)}${g ? `<em>${done ? "✓" : k + "/" + g.items.length}</em>` : t.n ? `<em>${t.n}</em>` : ""}</button>`;
+  }).join("");
+}
+function centreTab() {
+  const tabs = $("#tabs"), a = tabs && tabs.querySelector('[aria-selected="true"]');
+  if (a) tabs.scrollLeft = a.offsetLeft - (tabs.clientWidth - a.offsetWidth) / 2;
+}
+function renderModule(id) {
+  const m = id === "fav" ? buildFav() : BY[id];
+  if (!m) { location.hash = "#/"; return; }
+  const keyList = m.keyList || keysOf(m), md = id === "fav" || id === "mine" ? 0 : medal(m);
+  view.mod = m; view.keyList = keyList; view.tabs = tabsOf(m, keyList);
+  const want = id === "fav" ? view.favTab : tabState[id];
+  view.tab = (view.tabs.find(t => t.id === want) || view.tabs[0] || {}).id;
+  if (id !== "mine" && id !== "fav") store.set("kt_last_v1", id);
+  document.title = m.title + " · Korean Talk";
+  const pl = placeOf(id), talks = pl ? (pl.scenes || []).map(x => (KT.scenes || []).find(y => y.id === x)).filter(Boolean) : [];
+  let h = `<div class="mhead">
+    ${pl ? "" : `<div class="art mhead-art">${art(m, { brush: true })}</div>`}
+    <a class="back" href="#/">${ICON.back} Home</a>
+    ${pl ? `<div${tipAttr(pl.title + " · " + pl.ko, pl.tip)}>${dioHTML(pl, "banner")}</div>` : ""}
+    <div class="mtitle"><div><div class="koT">${esc(m.ko)}</div><h1>${esc(m.title)}</h1></div></div>
+    <div class="mstats">${m.items.length} phrases · <span id="kCount">${knownIn(m.items)}</span> known${id === "fav" ? ` · ${keyList.length} card${keyList.length === 1 ? "" : "s"}` : ""}${md ? ` · ${MEDAL[md]} ${MEDAL_NAME[md]}` : ""}</div>
+    <div class="mbtns">
+      ${m.items.length ? `<button class="btn primary" data-act="practice"${tipOf("practise")}>${ICON.play} Practise</button>` : ""}
+      ${pl && window.KTGames ? `<a class="btn ghost" href="#/listen/${id}"${tipOf("listenBtn")}>🎧 Listen</a>` : ""}${talks.map(x => `<a class="btn ghost" href="#/scenes/${x.id}"${tipOf("talk")}>💬 ${esc(x.title)}</a>`).join("")}
+      ${id === "mine" ? `<button class="btn ghost" data-act="edit-mine">Edit list</button>` : ""}
+    </div>
+  </div>`;
+  if (pl) h += guideHTML("p-" + pl.id, "About this stop: " + pl.title, pl.guide);
+  if (id === "mine") h += mineEditorHTML(!m.items.length);
+  if (id === "fav" && !m.items.length && !keyList.length) h += `<div class="empty">Nothing saved yet. Tap ☆ on any phrase or any "Remember these" card and it will show up here.</div>`;
+  h += `<div id="tabsAt"></div>${view.tabs.length > 1 ? `<div class="tabs" id="tabs" role="tablist">${tabsHTML()}</div>` : ""}<div id="pane">${paneHTML()}</div>`;
+  if (pl) {
+    const nx = KT.places[KT.places.indexOf(pl) + 1], nm = nx && BY[nx.mods[0]];
+    const go = (href, icon, title, sub, tip) => `<a class="sl" href="${href}"${tip || ""}><span>${icon}</span><div><b>${esc(title)}</b><small>${esc(sub)}</small></div>${ICON.right}</a>`;
+    h += `<section class="area" data-sec><h2>Where next <span>다음은</span></h2><div class="list sls">`
+      + talks.map(x => go("#/scenes/" + x.id, "💬", x.title, "Conversation — use these phrases in order", tipOf("talk"))).join("")
+      + (window.KTGames ? go("#/listen/" + id, "🎧", "Listen", "Ten of these phrases, by ear", tipOf("listenBtn")) : "")
+      + pl.mods.filter(x => x !== id && BY[x]).map(x => go("#/m/" + x, "📖", BY[x].title, "More phrases at this stop")).join("")
+      + (nm ? go("#/m/" + nm.id, "➡️", "Next stop: " + nx.title, nx.about) : "")
+      + go("#/", "🏠", "Home", "Back to your route") + `</div></section>`;
+  }
+  app.innerHTML = h;
+  centreTab();
+}
+function groupHTML(g) {
+  const items = visible(g.items);
+  return items.length ? `<section class="group" data-sec><h3>${esc(g.title)} <span>${esc(g.ko)}</span><em>${items.length}</em></h3><div class="list">${items.map(p => rowHTML(p)).join("")}</div></section>` : "";
+}
+function pagerHTML() {
+  const seq = view.tabs.filter(t => t.id !== "all" || view.mod.id === "fav"), j = seq.findIndex(t => t.id === view.tab), prev = seq[j - 1], next = seq[j + 1];
+  if (seq.length < 2) return "";
+  return `<div class="pager">${prev ? `<button class="btn ghost" data-tab="${prev.id}">← ${esc(prev.label)}</button>` : ""}${next
+    ? `<button class="btn primary" data-tab="${next.id}">Next: ${esc(next.label)} →</button>`
+    : view.mod.items.length ? `<button class="btn primary" data-act="practice">${ICON.play} Practise this module</button>` : ""}</div>`;
+}
+// What shows under the tabs.
+function paneHTML() {
+  const m = view.mod, fav = m.id === "fav", multi = view.tabs.length > 1, t = view.tab, all = t === "all" || !multi;
+  if (t === "keys") return keysHTML(view.keyList, fav) + pagerHTML();
+  let h = all && fav ? keysHTML(view.keyList, true) : "";
+  if (m.items.length) {
+    h += `<div class="tools">
+      <div class="seg" id="lvlSeg">${["all", "E", "M", "H"].map(l => `<button data-lvl="${l}" aria-pressed="${view.level === l}">${l === "all" ? "All" : LV[l]}</button>`).join("")}</div>
+      <label class="switch">Hide known <input type="checkbox" id="hideKnown" ${view.hideKnown ? "checked" : ""}></label>
+      ${all ? "" : `<span class="grow"></span><button class="btn small" data-act="practice-topic">${ICON.play} Practise topic</button>`}
+    </div>`;
+    h += (all ? m.groups : [m.groups[+t]]).map(groupHTML).join("") || `<div class="empty">Nothing to show with these filters. Try another level or turn off "Hide known".</div>`;
+  }
+  return h + (all ? "" : pagerHTML());
+}
+function renderPane() { $("#pane").innerHTML = paneHTML(); updateFabs(); }
+function setTab(id) {
+  view.tab = id;
+  if (view.mod.id === "fav") view.favTab = id; else { tabState[view.mod.id] = id; store.set("kt_tab_v1", tabState); }
+  const tabs = $("#tabs");
+  if (tabs) { tabs.innerHTML = tabsHTML(); centreTab(); }
+  $("#pane").innerHTML = paneHTML();
+  // start the new topic at its top, just under the tab row
+  const y = $("#tabsAt").getBoundingClientRect().top + window.scrollY - $(".top").offsetHeight;
+  if (window.scrollY > y) window.scrollTo(0, y);
+  updateFabs();
+}
+// "Remember these" cards: a module's optional  keys  text, one "Title | explanation" per line.
+// On the Favourites page (showMod) each card also says which module it came from.
+function keysHTML(keys, showMod) {
+  if (!keys.length) return "";
+  return `<section class="keys" data-sec><h3>${showMod ? "Saved cards" : "Remember these"} <span>${showMod ? "저장한 카드" : "꼭 기억하기"}</span><em>${keys.length}</em></h3>
+    <p class="hear-hint">🔊 Tap any Korean word to hear it.</p>
+    <div class="keys-grid">${keys.map(k => `<div class="key" data-key="${k.id}"><button class="kstar" data-act="fav-key" aria-pressed="${favKeys.has(k.id)}" aria-label="Save card to favourites">${ICON.star}</button>${k.t ? `<b>${koInline(k.t)}</b>` : ""}<span>${koInline(k.b)}</span>${showMod ? `<i>${esc(BY[k.mod].title)}</i>` : ""}</div>`).join("")}</div></section>`;
+}
+function mineEditorHTML(open) {
+  return `<div class="editor" id="mineEditor" ${open ? "" : "hidden"}>
+    <p>One phrase per line: <code>English | 한국어</code>. Add a level in front if you like (<code>E</code>, <code>M</code> or <code>H</code>), a tip at the end, and <code># Heading</code> lines to make groups. Romanization fills in by itself.</p>
+    <textarea id="mineText" spellcheck="false" placeholder="# At the gym
+E | Is this machine free? | 이거 써도 돼요?
+M | How many sets do you have left? | 몇 세트 남았어요?">${esc(store.get("kt_mine_v1", ""))}</textarea>
+    <div class="btns"><button class="btn primary" data-act="save-mine">Save</button><button class="btn ghost" data-act="copy-mine">Copy all</button></div>
+    <p style="margin:10px 0 0;font-size:max(12px,calc(12.5px*var(--fs)));color:var(--muted)">Saved on this device only. Use "Copy all" to move them into a module file so they show up everywhere.</p>
+  </div>`;
+}
+
+let searchIndex = null;
+function renderSearch(q) {
+  document.title = "Search · Korean Talk";
+  view.mod = null; view.tabs = null;
+  if (!searchIndex) searchIndex = ALL.map(p => [p, (p.en + " " + (p.note || "")).toLowerCase(), p.ko, romText(p), romText(p).replace(/ /g, "")]);
+  const raw = q.trim(), ql = raw.toLowerCase(), qs = strip(raw).replace(/\s+/g, "");
+  const hits = searchIndex.filter(([p, en, ko, py, pyn]) => en.includes(ql) || ko.includes(raw) || (qs.length > 1 && pyn.includes(qs))).map(x => x[0]);
+  const shown = hits.slice(0, 150);
+  app.innerHTML = `<div class="mhead"><a class="back" href="#/" data-act="clear-search">${ICON.back} Back</a>
+    <div class="mtitle"><h1>“${esc(raw)}”</h1><span class="grow"></span>${hits.length ? `<button class="btn primary" data-act="practice-search">${ICON.play} Practise these</button>` : ""}</div>
+    <div class="mstats">${hits.length} match${hits.length === 1 ? "" : "es"}${hits.length > shown.length ? ` · showing first ${shown.length}` : ""}</div></div>
+    ${shown.length ? `<div class="list" style="margin-top:14px">${shown.map(p => rowHTML(p, true)).join("")}</div>` : `<div class="empty">No phrases match. Try an English word, Hangul, or romanization (e.g. <b>juseyo</b>).</div>`}`;
+  renderSearch.hits = hits;
+}
+
+/* ───────────── router ───────────── */
+function route() {
+  const q = $("#q").value.trim(), m = location.hash.match(/^#\/m\/([\w-]+)/);
+  const g = location.hash.match(/^#\/(play|hangul|scenes|build|polite|numbers|listen)(?:\/([\w-]+))?$/);
+  let page = "home";
+  if (q) { page = "search"; renderSearch(q); }
+  else if (m) { page = m[1] === "fav" ? "fav" : "module"; renderModule(m[1]); }
+  else if (location.hash === "#/me") { page = "me"; renderMe(); }
+  else if (g && window.KTGames) { page = "play"; view.mod = null; view.tabs = null; KTGames.render(g[1], g[2]); }
+  else renderHome();
+  view.page = page;
+  document.querySelectorAll(".tb[data-nav]").forEach(a => a.dataset.nav === page ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  const nf = favs.size + favKeys.size;
+  $("#tbFav").textContent = nf ? (nf > 99 ? "99+" : nf) : "";
+  updateFabs();
+}
+window.addEventListener("hashchange", () => { $("#q").value = ""; route(); window.scrollTo(0, 0); updateFabs(); });
+let qT;
+$("#q").addEventListener("input", () => { clearTimeout(qT); qT = setTimeout(route, 120); });
+
+/* ───────────── bottom tab bar + floating buttons ───────────── */
+function dailyPractice() {
+  // Practise from the module in progress (or the first unfinished one), just enough cards to reach today's goal.
+  const last = BY[store.get("kt_last_v1", "")];
+  const src = [last].concat(MODS).find(m => m && m.items.some(p => !known.has(p.id)));
+  const n = Math.max(5, Math.min(20, G.goal - today()[0]));
+  const due = shuffle(dueItems()).slice(0, n), fresh = shuffle((src ? src.items : ALL).filter(p => !known.has(p.id) && !due.includes(p))).slice(0, n - due.length);
+  if (due.length) startPractice(due.concat(fresh), "Today · review" + (fresh.length && src ? " + " + src.title : ""), n, true);
+  else startPractice(src ? src.items : ALL, src ? "Today · " + src.title : "Today", n);
+}
+$("#tabbar").addEventListener("click", e => {
+  const b = e.target.closest(".tb");
+  if (!b) return;
+  if (b.dataset.go === "practice") return dailyPractice();
+  // a link: leave any search, and if we are already on that page just go back to its top
+  const same = b.getAttribute("href") === (location.hash || "#/");
+  if ($("#q").value) { $("#q").value = ""; if (same) route(); }
+  if (same) window.scrollTo(0, 0);
+});
+const scrollToY = y => window.scrollTo({ top: Math.max(0, y), behavior: S.motion === false ? "auto" : "smooth" });
+const stickyBottom = () => $(".top").offsetHeight + ($("#tabs") ? $("#tabs").offsetHeight : 0);
+// Where "Next" goes: the next topic tab on a module page, otherwise the next section heading further down.
+function nextTarget() {
+  if (view.tabs && view.tabs.length > 1 && view.tab !== "all") {
+    const seq = view.tabs.filter(t => t.id !== "all" || view.mod.id === "fav"), nx = seq[seq.findIndex(t => t.id === view.tab) + 1];
+    return nx ? { tab: nx } : null;
+  }
+  const off = stickyBottom() + 30;
+  const el = [...app.querySelectorAll("[data-sec]")].find(s => s.getBoundingClientRect().top > off);
+  return el ? { el } : null;
+}
+function updateFabs() {
+  const y = window.scrollY, t = nextTarget(), nb = $("#fabNext");
+  $("#fabTop").hidden = y < 500;
+  nb.hidden = !t || y < 200;
+  if (t) nb.innerHTML = t.tab ? "Next topic " + ICON.right : "Next section " + ICON.down;
+}
+$("#fabTop").addEventListener("click", () => scrollToY(0));
+$("#fabNext").addEventListener("click", () => {
+  const t = nextTarget();
+  if (!t) return;
+  if (t.tab) setTab(t.tab.id); else scrollToY(t.el.getBoundingClientRect().top + window.scrollY - stickyBottom() - 12);
+});
+let fabT = 0;
+window.addEventListener("scroll", () => { if (!fabT) fabT = setTimeout(() => { fabT = 0; updateFabs(); }, 90); }, { passive: true });
+
+/* ───────────── clicks ───────────── */
+app.addEventListener("click", e => {
+  const word = e.target.closest(".c[data-say]");   // Korean inside a card or an explanation: tap to hear it
+  if (word && !e.target.closest("summary")) { speak(word.dataset.say, word); return; }
+  const b = e.target.closest("[data-act],[data-lvl],[data-tab],[data-cat],[data-goal]");
+  if (!b) return;
+  if (b.dataset.lvl) { view.level = b.dataset.lvl; renderPane(); return; }
+  if (b.dataset.tab) { setTab(b.dataset.tab); return; }
+  if (b.dataset.cat) { view.cat = b.dataset.cat; renderHome(); updateFabs(); return; }
+  if (b.dataset.goal) {
+    G.goal = +b.dataset.goal;
+    const d = G.days[dayKey()]; if (d && d[0] >= G.goal) d[1] = 1;
+    saveG(); route(); return;
+  }
+  const act = b.dataset.act, row = b.closest(".row"), p = row && ALL.find(x => x.id === row.dataset.id);
+  if (act === "say" && p) speak(p.say, row.querySelector(".say"));
+  else if (act === "known" && p) {
+    if (known.has(p.id)) { known.delete(p.id); saveKnown(); delete SRS[p.id]; saveSRS(); }
+    else { withRewards(p, () => { known.add(p.id); saveKnown(); bump(p.id); }); srsGot(p.id); }
+    const k = known.has(p.id);
+    row.classList.toggle("is-known", k); b.setAttribute("aria-pressed", k);
+    const kc = $("#kCount"); if (kc && view.mod) kc.textContent = knownIn(view.mod.items);
+    const tabs = $("#tabs"); if (tabs) { const x = tabs.scrollLeft; tabs.innerHTML = tabsHTML(); tabs.scrollLeft = x; }
+  }
+  else if (act === "fav" && p) {
+    favs.has(p.id) ? favs.delete(p.id) : favs.add(p.id); saveFavs();
+    b.setAttribute("aria-pressed", favs.has(p.id));
+    $("#tbFav").textContent = favs.size + favKeys.size || "";
+    toast(favs.has(p.id) ? "Saved to Favourites." : "Removed from Favourites.");
+  }
+  else if (act === "fav-key") {
+    const id = b.closest(".key").dataset.key;
+    favKeys.has(id) ? favKeys.delete(id) : favKeys.add(id); saveFavs();
+    b.setAttribute("aria-pressed", favKeys.has(id));
+    $("#tbFav").textContent = favs.size + favKeys.size || "";
+    toast(favKeys.has(id) ? "Card saved to Favourites." : "Card removed from Favourites.");
+  }
+  else if (act === "practice") { const m = view.mod; if (m) startPractice(visible(m.items).length ? visible(m.items) : m.items, m.title); }
+  else if (act === "practice-topic") { const g = view.mod && view.mod.groups[+view.tab]; if (g) startPractice(visible(g.items).length ? visible(g.items) : g.items, g.title); }
+  else if (act === "daily") dailyPractice();
+  else if (act === "settings") { pickVoice(); toggleSheet(true); }
+  else if (act === "practice-search") startPractice(renderSearch.hits || [], "Search");
+  else if (act === "clear-search") { $("#q").value = ""; }
+  else if (act === "edit-mine") { const ed = $("#mineEditor"); ed.hidden = !ed.hidden; if (!ed.hidden) $("#mineText").focus(); }
+  else if (act === "save-mine") {
+    store.set("kt_mine_v1", $("#mineText").value); loadMine(); rebuildIndex(); searchIndex = null;
+    toast(`Saved ${MINE.items.length} phrase${MINE.items.length === 1 ? "" : "s"}.`); route();
+  }
+  else if (act === "copy-mine") {
+    const t = $("#mineText").value;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast("Copied."), () => { $("#mineText").select(); toast("Selected — press copy."); });
+  }
+});
+app.addEventListener("toggle", e => {   // "toggle" does not bubble, so it is caught on the way down
+  const d = e.target.closest && e.target.closest("details[data-guide]");
+  if (d) { if (d.open) delete guideShut[d.dataset.guide]; else guideShut[d.dataset.guide] = 1; store.set("kt_guide_v1", guideShut); }
+}, true);
+app.addEventListener("change", e => { if (e.target.id === "hideKnown") { view.hideKnown = e.target.checked; renderPane(); } });
+
+/* ───────────── settings ───────────── */
+function applySettings() {
+  document.body.classList.toggle("no-rom", !S.rom);
+  document.documentElement.classList.toggle("motion", S.motion !== false);
+  if (S.theme === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.dataset.theme = S.theme;
+  document.querySelectorAll("[data-set]").forEach(i => i.checked = !!S[i.dataset.set]);
+  const fi = fsIndex();
+  document.documentElement.style.setProperty("--fs", FS[fi]);
+  $("#fsVal").textContent = Math.round(FS[fi] * 100) + "%";
+  document.querySelectorAll("#fsSeg button").forEach(b => b.disabled = +b.dataset.fs < 0 ? fi === 0 : fi === FS.length - 1);
+  document.querySelectorAll("#themeSeg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.theme === S.theme));
+  document.querySelectorAll("#engSeg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.eng === S.engine));
+  document.querySelectorAll("#homeSeg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.home === S.home));
+  pickVoice();
+  const dark = isDark();
+  $("#themeBtn").innerHTML = dark
+    ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
+    : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>';
+  $("#themeBtn").title = dark ? "Light mode" : "Dark mode";
+}
+const darkMQ = window.matchMedia("(prefers-color-scheme: dark)");
+const isDark = () => S.theme === "dark" || (S.theme === "auto" && darkMQ.matches);
+if (darkMQ.addEventListener) darkMQ.addEventListener("change", () => applySettings());
+$("#themeBtn").addEventListener("click", () => { S.theme = isDark() ? "light" : "dark"; saveS(); applySettings(); });
+const sheet = $("#sheet"), sheetBg = $("#sheetBg");
+const toggleSheet = open => { sheet.classList.toggle("open", open); sheetBg.classList.toggle("open", open); };
+$("#gear").addEventListener("click", () => { pickVoice(); toggleSheet(!sheet.classList.contains("open")); });
+sheetBg.addEventListener("click", () => toggleSheet(false));
+sheet.addEventListener("change", e => { const k = e.target.dataset.set; if (k) { S[k] = e.target.checked; saveS(); applySettings(); if (k === "rom") route(); } });
+$("#engSeg").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { S.engine = b.dataset.eng; saveS(); applySettings(); speak("안녕하세요"); } });
+$("#fsSeg").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { S.fs = FS[Math.max(0, Math.min(FS.length - 1, fsIndex() + (+b.dataset.fs)))]; saveS(); applySettings(); } });
+$("#homeSeg").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { S.home = b.dataset.home; saveS(); applySettings(); route(); } });
+$("#themeSeg").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { S.theme = b.dataset.theme; saveS(); applySettings(); } });
+// Reset progress: everything that was earned or remembered about where you were — known marks, points, level,
+// streak, daily counts, medals, "jump back in" and the topic you were on. Favourites, own phrases and settings stay.
+$("#resetBtn").addEventListener("click", () => {
+  if (!confirm("Reset all progress on this device?\n\nKnown marks, points, level, streak, medals and game progress go back to zero. Favourites, your own phrases and settings are kept.")) return;
+  known.clear(); saveKnown();
+  G.days = {}; G.reviews = 0; G.bonus = 0; saveG(); countedToday.clear();
+  Object.keys(SRS).forEach(k => delete SRS[k]); saveSRS();
+  try { localStorage.removeItem("kt_play_v1"); } catch (e) {}
+  if (window.KTGames) KTGames.reset();
+  Object.keys(tabState).forEach(k => delete tabState[k]); store.set("kt_tab_v1", tabState);
+  try { localStorage.removeItem("kt_last_v1"); } catch (e) {}
+  Object.assign(view, { level: "all", hideKnown: false, cat: "all", favTab: null });
+  toggleSheet(false);
+  if (location.hash && location.hash !== "#/") location.hash = "#/"; else { route(); window.scrollTo(0, 0); }
+  toast("Progress reset. Back to Level 1.");
+});
+// Erase everything: remove all of this app's saved data and start up fresh, exactly as a new user sees it.
+$("#eraseBtn").addEventListener("click", () => {
+  if (!confirm("Erase everything on this device?\n\nProgress, favourites, your own phrases and settings will all be removed. This cannot be undone.")) return;
+  try { Object.keys(localStorage).filter(k => k.startsWith("kt_")).forEach(k => localStorage.removeItem(k)); } catch (e) {}
+  location.hash = "#/"; location.reload();
+});
+
+/* ───────────── practice ───────────── */
+const pr = { deck: [], i: 0, shown: false, got: 0, title: "" };
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+// exact = use these items as they are (the daily mix of due reviews and new phrases).
+function startPractice(items, title, limit, exact) {
+  if (!items.length) return;
+  const unknown = items.filter(p => !known.has(p.id));
+  const pool = exact ? items.slice() : shuffle((unknown.length ? unknown : items).slice());
+  pr.deck = limit ? pool.slice(0, limit) : pool.slice(0, 30);
+  pr.i = 0; pr.got = 0; pr.pts = 0; pr.cheered = false; pr.shown = false; pr.title = title; pr.src = [items, title, limit, exact];
+  $("#pr").classList.add("open"); document.body.style.overflow = "hidden";
+  drawCard();
+}
+function closePractice() { $("#pr").classList.remove("open"); document.body.style.overflow = ""; stopAudio(); route(); }
+function drawCard() {
+  const flash = $("#flash"), btns = $("#prBtns"), n = pr.deck.length;
+  document.querySelectorAll("#dirSeg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.dir === S.dir));
+  $("#prBar").style.width = (pr.i / n * 100) + "%";
+  if (pr.i >= n) {
+    $("#prCount").textContent = pr.title;
+    flash.className = "flash done";
+    flash.innerHTML = `<h2>Round done 🎉</h2><p>${pr.got} of ${n} marked as known · +${pr.pts} pts</p>
+      <p>Today: ${today()[0]} of ${G.goal}${today()[1] ? " ✓" : ""} · 🔥 ${streak()}-day streak</p>`;
+    if (pr.got && !pr.cheered) { pr.cheered = true; confetti(); }
+    btns.innerHTML = `<button class="btn ghost" data-pr="close">Close</button><button class="btn primary" data-pr="again-round">Another round</button>`;
+    return;
+  }
+  const p = pr.deck[pr.i];
+  $("#prCount").textContent = `${pr.i + 1} / ${n}`;
+  flash.className = "flash";
+  const say = `<div class="flash-acts"><button class="say-big" data-pr="say">${ICON.say} Listen</button><button class="say-big" data-pr="fav" aria-pressed="${favs.has(p.id)}">${ICON.star} ${favs.has(p.id) ? "Saved" : "Save"}</button></div>`;
+  const koBlock = (withRom) => `<div class="ko${withRom && S.rom ? "" : " no-rom-local"}">${koHTML(p)}</div>`;
+  const pic = p.icon ? `<div class="q-pic" aria-hidden="true">${p.icon}</div>` : "";
+  let html;
+  if (S.dir === "en") {
+    html = `<div><span class="lvl ${p.lvl}">${LV[p.lvl]}</span></div>${pic}<div class="q-en">${esc(p.en)}</div>`;
+    if (pr.shown) html += `<div class="divider"></div>${koBlock(true)}${say}${p.note ? `<div class="note">${esc(p.note)}</div>` : ""}`;
+  } else {
+    html = `<div><span class="lvl ${p.lvl}">${LV[p.lvl]}</span></div>${koBlock(pr.shown)}${say}`;
+    if (pr.shown) html += `<div class="divider"></div>${pic}<div class="q-en">${esc(p.en)}</div>${p.note ? `<div class="note">${esc(p.note)}</div>` : ""}`;
+  }
+  flash.innerHTML = html;
+  flash.querySelectorAll(".no-rom-local .c i").forEach(i => i.style.visibility = "hidden");
+  btns.innerHTML = pr.shown
+    ? `<button class="btn ghost" data-pr="again">Again</button><button class="btn got" data-pr="got">${ICON.tick} Got it</button>`
+    : `<button class="btn primary" data-pr="show">Show answer</button>`;
+  if (S.autoplay && (pr.shown ? S.dir === "en" : S.dir === "ko")) speak(p.say, flash.querySelector(".say-big"));
+}
+function prAct(a) {
+  const p = pr.deck[pr.i];
+  if (a === "show") { pr.shown = true; drawCard(); }
+  else if (a === "again" && pr.shown) { G.reviews++; saveG(); srsAgain(p.id); pr.pts += 2; pr.deck.splice(pr.i, 1); pr.deck.splice(Math.min(pr.i + 3, pr.deck.length), 0, p); pr.shown = false; drawCard(); }
+  else if (a === "got" && pr.shown) {
+    const x0 = xp();
+    withRewards(p, () => { known.add(p.id); saveKnown(); G.reviews++; saveG(); bump(p.id); });
+    srsGot(p.id);
+    if (window.KTMotion) KTMotion.burst(document.querySelector('#prBtns [data-pr="got"]'), 8);
+    pr.pts += xp() - x0; pr.got++; pr.i++; pr.shown = false; drawCard();
+  }
+  else if (a === "say" && p) speak(p.say, document.querySelector(".say-big"));
+  else if (a === "fav" && p) {
+    favs.has(p.id) ? favs.delete(p.id) : favs.add(p.id); saveFavs();
+    const fb = document.querySelector('#flash [data-pr="fav"]');
+    if (fb) { fb.setAttribute("aria-pressed", favs.has(p.id)); fb.innerHTML = ICON.star + " " + (favs.has(p.id) ? "Saved" : "Save"); }
+    else toast(favs.has(p.id) ? "Saved to Favourites." : "Removed from Favourites.");
+  }
+  else if (a === "close") closePractice();
+  else if (a === "again-round") startPractice(...pr.src);
+}
+$("#pr").addEventListener("click", e => { const b = e.target.closest("[data-pr]"); if (b) prAct(b.dataset.pr); });
+$("#prClose").addEventListener("click", closePractice);
+$("#dirSeg").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { S.dir = b.dataset.dir; saveS(); pr.shown = false; drawCard(); } });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") { if ($("#pr").classList.contains("open")) closePractice(); else toggleSheet(false); return; }
+  if (!$("#pr").classList.contains("open") || e.target.closest("input,textarea")) return;
+  if (e.key === " " || e.key === "Enter") { e.preventDefault(); prAct(pr.shown ? "got" : "show"); }
+  else if (e.key === "1") prAct("again");
+  else if (e.key === "2") prAct("got");
+  else if (e.key.toLowerCase() === "p") prAct("say");
+  else if (e.key.toLowerCase() === "f") prAct("fav");
+});
+
+// What the Play pages (lib/games.js) use from here.
+window.KTApp = { S, store, esc, ICON, speak, stopAudio, toast, confetti, shuffle, koHTML, art, dioHTML, guideHTML, tipAttr, award, route: () => route(), get mods() { return MODS; } };
+
+/* ───────────── boot: load module files ───────────── */
+function start() {
+  MODS = KT.files.map(f => KT.modules.find(m => m.id === f) ).filter(Boolean)
+    .concat(KT.modules.filter(m => !KT.files.includes(m.id)))
+    .map(buildModule);
+  if (window.KTArt) { $("#bgart").innerHTML = KTArt.backdrop(); $("#prArt").innerHTML = KTArt.backdrop(); }
+  loadMine(); rebuildIndex(); applySettings(); route();
+}
+let pending = KT.files.length;
+if (!pending) start();
+KT.files.forEach(f => {
+  const s = document.createElement("script");
+  s.src = "modules/" + f + ".js"; s.async = false;
+  s.onload = () => { if (!KT.modules.some(m => m.id === f)) KT.failed.push(f + ".js (id should be \"" + f + "\")"); if (--pending === 0) start(); };
+  s.onerror = () => { KT.failed.push(f + ".js"); if (--pending === 0) start(); };
+  document.head.appendChild(s);
+});
+})();
+</script>
+</body>
+</html>

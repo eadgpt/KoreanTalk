@@ -1,0 +1,168 @@
+/* Motion, hover tips and the "About…" panels.
+   Every animation is behind the class "motion" on <html> (Settings → Motion), so one switch turns it all off. */
+@property --p{syntax:"<number>";inherits:true;initial-value:0}
+html:not(.motion) *{transition:none!important;animation:none!important}
+
+/* ── reveal: rise into place when scrolled into view (lib/motion.js adds .rv, then .in) ── */
+.motion .rv{opacity:0;transform:translateY(22px) scale(.98)}
+.motion .rv.in{opacity:1;transform:none;transition:opacity .5s ease var(--d,0ms),transform .65s cubic-bezier(.2,.9,.25,1.15) var(--d,0ms)}
+.motion .rv:not(.in) .bar i{width:0!important}
+.motion .rv.in .bar i{transition:width 1s cubic-bezier(.2,.8,.2,1) calc(var(--d,0ms) + .3s)}
+.motion .ring{transition:--p 1.2s cubic-bezier(.2,.8,.2,1) .25s}
+.motion .rv:not(.in) .ring{--p:0!important}
+.motion #app.page-in{animation:pagein .38s cubic-bezier(.2,.8,.2,1)}
+@keyframes pagein{from{opacity:0;transform:translateY(12px)}}
+
+/* ── place pictures: pop in, float, shift in depth with the cursor (or with scroll on a phone) ── */
+.dio .d2{transform:none;rotate:-7deg}
+.dio .d3{transform:none;rotate:6deg}
+.dio .d1{--k:10px;--sd:.15s}.dio .d2{--k:-7px;--sd:.27s}.dio .d3{--k:15px;--sd:.39s}.dio .d4{--k:-20px;--sd:.5s}
+.motion .dio span{translate:calc(var(--px,0) * var(--k)) calc(var(--py,0) * var(--k));transition:scale .65s cubic-bezier(.34,1.56,.64,1) var(--sd),translate .3s ease-out;animation:dfloat 6s ease-in-out infinite}
+.motion .dio .d2{animation-duration:7.5s;animation-delay:-2s}
+.motion .dio .d3{animation-duration:5.5s;animation-delay:-1s}
+.motion .dio .d4{animation-duration:8.5s;animation-delay:-3.5s}
+.motion .rv:not(.in) .dio span{scale:0}
+.motion .dio.banner span{animation:dpop .65s cubic-bezier(.34,1.56,.64,1) var(--sd) backwards,dfloat 6s ease-in-out infinite}
+.motion .lit .dio .d1,.motion .dio.banner:hover .d1{animation:dwig .7s ease-in-out,dfloat 6s ease-in-out infinite}
+@keyframes dfloat{50%{transform:translateY(-6px)}}
+@keyframes dpop{from{scale:0}}
+@keyframes dwig{20%{rotate:-11deg}50%{rotate:9deg}80%{rotate:-5deg}}
+.dio::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;translate:-110% 0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.5) 50%,transparent 62%)}
+.motion .in .dio::before,.motion .dio.banner::before{animation:sheen 1.1s ease-out .35s 1 both}
+@keyframes sheen{to{translate:110% 0}}
+
+/* ── cards lean towards the cursor and catch a soft light ── */
+.stop-card,.gcard,.guide{position:relative}
+.motion .stop-card,.motion .gcard,.motion .card,.motion .goal,.motion .starter{transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .15s,box-shadow .3s}
+.motion .lit{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-3px);transition:transform .1s ease-out,box-shadow .3s;box-shadow:0 14px 34px rgba(30,25,20,.14);will-change:transform}
+.stop-card::after,.gcard::after,.card::after,.guide::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:3;opacity:0;transition:opacity .3s;
+  background:radial-gradient(120px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 10%,transparent),transparent 70%)}
+.motion .lit::after,.motion .guide.spot::after{opacity:1}
+
+/* ── the route: the line fills as you travel, stop numbers pop ── */
+.route::after{content:"";position:absolute;left:17px;top:24px;width:3px;border-radius:3px;background:var(--accent);height:calc((100% - 48px) * var(--rp,0));transition:height .25s linear}
+.stop-n{transition:border-color .3s,color .3s,scale .4s cubic-bezier(.34,1.56,.64,1)}
+.motion .stop.passed:not(.done) .stop-n{border-color:var(--accent);color:var(--accent);scale:1.12}
+.motion .rv:not(.in) .stop-n{scale:0}
+.motion .sl{transition:padding .2s,background .2s;border-radius:10px}
+.motion .sl:hover{padding-left:8px;padding-right:0;background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.motion .sl:hover>span{animation:hop .5s cubic-bezier(.3,1.5,.5,1)}
+.motion .sl svg{transition:translate .2s}
+.motion .sl:hover svg{translate:4px 0}
+.motion .starter{overflow:hidden;position:relative}
+.motion .starter::after{content:"";position:absolute;inset:0;pointer-events:none;translate:-110% 0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.28) 50%,transparent 60%);animation:sheen 1.2s ease-out .6s 1 both}
+
+/* ── phrases: the picture hops on hover and beats while the audio plays ── */
+.motion .row:hover .pi,.motion .word.playing .wp,.motion .letter.playing>b{animation:hop .5s cubic-bezier(.3,1.5,.5,1)}
+.motion .row:has(.say.playing) .pi{animation:beat .7s ease-in-out infinite}
+.motion .ic.tick[aria-pressed="true"] svg,.motion .ic.star[aria-pressed="true"] svg,.motion .kstar[aria-pressed="true"] svg{animation:dpop .4s cubic-bezier(.34,1.56,.64,1)}
+.motion .ic:active,.motion .kbtn:active,.motion .tile:active,.motion .chip:active,.motion .tab:active,.motion .btn:active{scale:.94}
+.motion .ic,.motion .kbtn,.motion .chip,.motion .tab,.motion .btn{transition:scale .15s,filter .15s,background .2s,color .2s,border-color .2s}
+@keyframes hop{30%{translate:0 -7px;rotate:-8deg}60%{translate:0 0;rotate:6deg}}
+@keyframes beat{50%{scale:1.22}}
+
+/* ── flashcards and quizzes: contents deal in, right answers bounce ── */
+.motion #flash>*,.motion #qzCard>*{animation:deal .42s cubic-bezier(.2,.9,.25,1.15) backwards}
+.motion #flash>*:nth-child(2),.motion #qzCard>*:nth-child(2){animation-delay:.05s}
+.motion #flash>*:nth-child(3),.motion #qzCard>*:nth-child(3){animation-delay:.1s}
+.motion #flash>*:nth-child(4),.motion #qzCard>*:nth-child(4){animation-delay:.15s}
+.motion #flash>*:nth-child(n+5),.motion #qzCard>*:nth-child(n+5){animation-delay:.2s}
+.motion #flash>.q-pic{animation:dpop .6s cubic-bezier(.34,1.56,.64,1) backwards}
+.motion #qzCard .q-opt{animation:deal .38s cubic-bezier(.2,.9,.25,1.15) backwards}
+.motion #qzCard .q-opt:nth-child(1){animation-delay:.12s}.motion #qzCard .q-opt:nth-child(2){animation-delay:.18s}
+.motion #qzCard .q-opt:nth-child(3){animation-delay:.24s}.motion #qzCard .q-opt:nth-child(4){animation-delay:.3s}
+.motion #qzCard .q-opt.right{animation:yay .55s cubic-bezier(.3,1.6,.5,1)}
+.motion #qzCard .q-opt.wrong{animation:shake .3s}
+.motion #qzCard .q-after>*{animation:deal .35s backwards}
+@keyframes deal{from{opacity:0;translate:0 14px;scale:.96}}
+@keyframes yay{35%{scale:1.07}}
+
+/* ── numbers: hands sweep to the time, things arrive one by one, the price tag swings ── */
+.clock .hh,.clock .mh{transform:rotate(var(--a));transform-origin:50px 50px}
+.motion .clock .hh{animation:sweep 1s cubic-bezier(.3,1.35,.5,1) .15s backwards}
+.motion .clock .mh{animation:sweep 1.2s cubic-bezier(.3,1.35,.5,1) .15s backwards}
+@keyframes sweep{from{transform:rotate(0deg)}}
+.cnt span{display:inline-block}
+.motion .cnt span{animation:dpop .42s cubic-bezier(.34,1.56,.64,1) backwards;animation-delay:calc(var(--i) * 85ms + .15s)}
+.motion #qzCard .ptag{display:inline-block;transform-origin:14px 50%;animation:swing 1s ease-out .1s backwards}
+@keyframes swing{0%{rotate:-14deg;opacity:0}30%{rotate:9deg;opacity:1}55%{rotate:-5deg}80%{rotate:2deg}}
+
+/* ── conversations: typing dots, faces pop, the receipt prints, your choices slide up ── */
+.typing .bub{padding:14px 16px}
+.typing .bub i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--muted);margin:0 2px}
+.motion .typing .bub i{animation:tdot 1s ease-in-out infinite}
+.motion .typing .bub i:nth-child(2){animation-delay:.15s}.motion .typing .bub i:nth-child(3){animation-delay:.3s}
+@keyframes tdot{30%{translate:0 -6px;opacity:.5}}
+.motion .av{animation:dpop .45s cubic-bezier(.34,1.56,.64,1) backwards}
+.motion .rcpt{animation:print .55s ease-out .35s backwards}
+@keyframes print{from{clip-path:inset(0 0 100% 0);translate:0 -8px}to{clip-path:inset(0)}}
+.motion .say-turn{animation:deal .4s cubic-bezier(.2,.9,.25,1.15)}
+.motion .sopt{animation:deal .36s cubic-bezier(.2,.9,.25,1.15) backwards;transition:scale .15s,border-color .2s}
+.motion .sopt:nth-child(2){animation-delay:.1s}.motion .sopt:nth-child(3){animation-delay:.17s}.motion .sopt:nth-child(4){animation-delay:.24s}
+.motion .sopt.wrong{animation:shake .3s}
+.motion .sopt:active{scale:.97}
+.dots i{transition:background .4s,scale .4s cubic-bezier(.34,1.56,.64,1)}
+.motion .dots i.ok,.motion .dots i.miss{scale:1 1.5}
+.motion .setting span,.motion .whofor .face,.motion .stars{animation:dpop .55s cubic-bezier(.34,1.56,.64,1) backwards}
+.motion .scene-done{animation:deal .45s cubic-bezier(.2,.9,.25,1.15)}
+
+/* ── sentence builder and block lab ── */
+.motion .b-line .tile:last-child{animation:dpop .28s cubic-bezier(.34,1.56,.64,1)}
+.motion .b-line.right .tile{animation:hop .55s cubic-bezier(.3,1.5,.5,1) backwards}
+.motion .b-line.right .tile:nth-child(2){animation-delay:.07s}.motion .b-line.right .tile:nth-child(3){animation-delay:.14s}
+.motion .b-line.right .tile:nth-child(4){animation-delay:.21s}.motion .b-line.right .tile:nth-child(n+5){animation-delay:.28s}
+.motion .lab-eq .jamo.l,.motion .lab-eq .jamo.v,.motion .lab-eq .jamo.t{transition:background .25s,color .25s}
+
+/* ── tab bar ── */
+.motion .tb[aria-current="page"] svg{animation:dpop .42s cubic-bezier(.34,1.56,.64,1)}
+.motion .tb-go i{animation:breathe 2.8s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 40%,transparent),0 0 0 9px color-mix(in srgb,var(--accent) 14%,transparent)}}
+
+/* ── sparks from a right answer ── */
+.bst{position:fixed;z-index:75;pointer-events:none;font-size:18px;line-height:1;margin:-9px 0 0 -9px;animation:bst .8s cubic-bezier(.15,.8,.3,1) forwards}
+@keyframes bst{to{translate:var(--dx) var(--dy);rotate:var(--r);scale:.4;opacity:0}}
+
+/* ── tips ── */
+.tipbox{position:fixed;left:0;top:0;z-index:80;max-width:min(330px,calc(100vw - 16px));background:var(--ink);color:var(--bg);border-radius:14px;padding:12px 14px;box-shadow:0 14px 36px rgba(0,0,0,.32);
+  pointer-events:none;opacity:0;visibility:hidden;transform:translateY(8px) scale(.96);transform-origin:20px 0;transition:opacity .16s,transform .22s cubic-bezier(.2,.9,.25,1.25),visibility 0s .2s;font-size:calc(14px*var(--fs));line-height:1.45}
+.tipbox.show{opacity:1;visibility:visible;transform:none;transition:opacity .16s,transform .22s cubic-bezier(.2,.9,.25,1.25)}
+.tipbox b{display:block;font-size:calc(14.5px*var(--fs));margin-bottom:3px}
+.tipbox span{display:block;opacity:.9}
+.ib{flex:none;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;border:1.5px solid currentColor;font:italic 700 13px/1 Georgia,"Times New Roman",serif;color:var(--muted);vertical-align:middle}
+button.ib{cursor:help}
+button.ib:hover{color:var(--accent)}
+[data-tip]{-webkit-tap-highlight-color:transparent}
+
+/* ── "About…" panels: the longer explanation inside a section ── */
+.guide{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:16px;overflow:hidden}
+.guide summary{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;list-style:none;font-size:calc(15px*var(--fs))}
+.guide summary::-webkit-details-marker{display:none}
+.guide summary em{font-style:normal;font-size:max(12px,calc(13px*var(--fs)));color:var(--muted);flex:1;min-width:0}
+.guide summary .ib{color:var(--accent)}
+.guide summary svg{color:var(--muted);transition:rotate .25s}
+.guide[open] summary svg{rotate:180deg}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;padding:0 14px 14px}
+.guide-grid>div{background:var(--surface-2);border-radius:12px;padding:12px 14px}
+.guide-grid h4{margin:0 0 4px;font-size:calc(14px*var(--fs));color:var(--accent)}
+.guide-grid p{margin:0;font-size:calc(14px*var(--fs));line-height:1.55;color:var(--ink)}
+.guide-grid .c{margin:0 1px 2px;vertical-align:baseline}
+.guide-grid .c b{font-size:calc(17px*var(--fs));line-height:1.2}
+.motion .guide[open] .guide-grid>div{animation:deal .4s cubic-bezier(.2,.9,.25,1.15) backwards}
+.motion .guide[open] .guide-grid>div:nth-child(2){animation-delay:.06s}.motion .guide[open] .guide-grid>div:nth-child(3){animation-delay:.12s}.motion .guide[open] .guide-grid>div:nth-child(4){animation-delay:.18s}
+@media (max-width:600px){
+  /* on a phone the cards sit side by side and swipe, so the panel never pushes the phrases far down */
+  .guide-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:14px}
+  .guide-grid::-webkit-scrollbar{display:none}
+  .guide-grid>div{flex:none;width:84%;scroll-snap-align:center}
+  .guide summary em{display:none}
+}
+.stop-body h3 .ib{margin-left:2px;align-self:center}
+
+/* ── Korean inside cards and explanations can be tapped to hear it ── */
+.c[data-say]{cursor:pointer}
+.c[data-say] b{transition:color .15s}
+.c[data-say]:hover b{color:var(--accent)}
+.c[data-say].playing b{color:var(--accent)}
+.list.sls{padding:2px 14px}
+.list.sls .sl:first-child{border-top:0}
+.hear-hint{margin:0;padding:0 16px 10px;font-size:max(12px,calc(13px*var(--fs)));color:var(--muted)}
