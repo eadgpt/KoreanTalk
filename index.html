@@ -464,9 +464,10 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 };
-// iPhone mutes the built-in voice when the phone is on silent, so iPhones/iPads start on the online voice.
-const IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-const S = Object.assign({ rom: true, home: "map", motion: true, slow: false, autoplay: true, theme: "auto", dir: "en", fs: 1, engine: IOS ? "online" : "device" }, store.get("kt_settings_v1", {}));
+// Everyone starts on the online voice: it plays even when an iPhone is on silent, which the built-in voice does not.
+const S = Object.assign({ rom: true, home: "map", motion: true, slow: false, autoplay: true, theme: "auto", dir: "en", fs: 1, engine: "online" }, store.get("kt_settings_v1", {}));
+// Online became the default for everyone on 2026-10-12; a choice saved before then is reset once.
+if (!store.get("kt_voice_v2", 0)) { S.engine = "online"; store.set("kt_voice_v2", 1); store.set("kt_settings_v1", S); }
 // Text size steps for Settings → Text size. Every font size in the CSS is multiplied by --fs.
 const FS = [0.9, 1, 1.1, 1.2, 1.35, 1.5];
 const fsIndex = () => FS.reduce((best, v, i) => Math.abs(v - S.fs) < Math.abs(FS[best] - S.fs) ? i : best, 1);
