@@ -17,6 +17,8 @@ Built on the same shell as Mandarin Talk (static HTML, no build step).
 | **Play → Hangul** | Eight lessons (vowels → consonants → final consonants → real signs), each with a quiz. Plus the **Block lab**: snap letters into a syllable and hear it |
 | **Play → Conversations** | Eight role-plays (café, convenience store, barbecue, taxi, subway, clothes shop, meeting someone, pharmacy). You pick what to say; wrong picks explain why |
 | **Play → Sentence builder** | Word tiles to put in Korean order. Particles (는, 를, 에…) are coloured |
+| **Play → Shadowing** (also 🎙️ on every phrase, and **Speak** on each stop) | Hear a phrase, record yourself saying it, then hear the model and your own voice back to back. The recording stays on the device and is dropped when you move on |
+| **Play → Watch** (also on each stop) | Two short YouTube videos per stop, by Korean teachers. Nothing loads from YouTube until a video is tapped |
 | **Play → Listening** | Hear a phrase, pick its meaning. Per module |
 | **Play → Numbers** | Prices (Sino numbers), counting (native numbers + counters), the clock (both) |
 | **Play → Politeness switch** | 24 phrases in casual / polite / formal, with a quiz |
@@ -85,6 +87,7 @@ To add a module: copy `modules/_template.js`, rename it, and add its name to `KT
 | File | Format |
 |---|---|
 | `data/places.js` | The stops on the home route: `scene`, `hue`, `about`, `mods`, `scenes`, `games` |
+| `data/clips.js` | Videos per stop: YouTube `id`, `title`, `by`, `level`, `why`. Check they still exist with `node tools/check.js --clips` |
 | `data/hangul.js` | Lessons: letters `[letter, sound, memory hook]` and words `[Korean, English, picture]` |
 | `data/scenes.js` | Role-plays: `face` and `set` for who and where; `["t", Korean, English]` for the other person, `["y", goal, [[Korean, English, 1 or 0, why wrong], …]]` for your turn |
 | `data/builder.js` | `English | Korean | tip` — a space starts a new tile, `_` keeps words on one tile, `+` marks a particle |
@@ -103,7 +106,7 @@ A scheduled task ("Korean slang update", Sundays) searches for new slang, adds c
 
 ## Earlier versions
 
-`archive/v1-2026-10-11/` is the first version (plain module grid, no pictures). `archive/v2-2026-10-12/` has the route and pictures but no motion, tips or About panels. To go back, copy its `index.html`, `lib/`, `data/` and `modules/` over the current ones.
+`archive/v1-2026-10-11/` is the first version (plain module grid, no pictures). `archive/v2-2026-10-12/` has the route and pictures but no motion, tips or About panels. `archive/v3-2026-10-13/` is the version before shadowing and videos. To go back, copy its `index.html`, `lib/`, `data/` and `modules/` over the current ones.
 
 ## Publish
 
@@ -111,7 +114,7 @@ A scheduled task ("Korean slang update", Sundays) searches for new slang, adds c
 ./make_upload.sh
 ```
 
-refreshes `upload/` with exactly the files a website needs. Not published anywhere yet.
+refreshes `upload/` with exactly the files a website needs. It also stamps every script address with the build time, so a phone never mixes a new page with older saved files. Live at https://eadgpt.github.io/KoreanTalk/ (repo `eadgpt/KoreanTalk`).
 
 ---
 Audio: Google Translate's online voice (plays even when an iPhone is on silent) or the device's built-in Korean voice. Art: ink-wash scenes drawn in code (`lib/art.js`).

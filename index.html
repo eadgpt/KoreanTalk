@@ -361,8 +361,8 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
 .confetti i{position:absolute;top:-24px;width:9px;height:14px;border-radius:2px;animation:fall 1.6s ease-in forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(600deg)}}
 </style>
-<link rel="stylesheet" href="lib/games.css">
-<link rel="stylesheet" href="lib/motion.css">
+<link rel="stylesheet" href="lib/games.css?v=20261013042026">
+<link rel="stylesheet" href="lib/motion.css?v=20261013042026">
 </head>
 <body>
 
@@ -440,22 +440,23 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
 
 <div class="toast" id="toast"></div>
 
-<script src="lib/hangul.js"></script>
-<script src="lib/art.js"></script>
-<script src="lib/icons.js"></script>
+<script src="lib/hangul.js?v=20261013042026"></script>
+<script src="lib/art.js?v=20261013042026"></script>
+<script src="lib/icons.js?v=20261013042026"></script>
 <script>
 // Modules call KT.module({...}) when they load.
 window.KT = { modules: [], failed: [], areas: [], files: [], changelog: [],
   module(def) { if (!this.modules.some(m => m.id === def.id)) this.modules.push(def); } };
 </script>
-<script src="modules/list.js"></script>
-<script src="data/places.js"></script>
-<script src="data/hangul.js"></script>
-<script src="data/scenes.js"></script>
-<script src="data/builder.js"></script>
-<script src="data/polite.js"></script>
-<script src="lib/games.js"></script>
-<script src="lib/motion.js"></script>
+<script src="modules/list.js?v=20261013042026"></script>
+<script src="data/places.js?v=20261013042026"></script>
+<script src="data/hangul.js?v=20261013042026"></script>
+<script src="data/scenes.js?v=20261013042026"></script>
+<script src="data/builder.js?v=20261013042026"></script>
+<script src="data/polite.js?v=20261013042026"></script>
+<script src="data/clips.js?v=20261013042026"></script>
+<script src="lib/games.js?v=20261013042026"></script>
+<script src="lib/motion.js?v=20261013042026"></script>
 <script>
 (function () {
 "use strict";
@@ -584,7 +585,8 @@ const ICON = {
   right: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
   down: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
   back: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>',
-  play: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>'
+  play: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>',
+  mic: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>'
 };
 function toast(msg, ms) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), ms || 2600); }
 
@@ -707,10 +709,12 @@ function playOnline(text, done) {
   clip.play().catch(err => { if (err && err.name !== "AbortError") clip.onerror(); });
 }
 let speakNo = 0, saying = null;   // saying keeps the current line alive: Safari drops one that nothing refers to
-function speak(text, btn) {
+// then (optional) runs once the line has finished playing.
+function speak(text, btn, then) {
   const cut = stopAudio(), no = ++speakNo;
   if (btn) { btn.classList.add("playing"); playingBtn = btn; }
-  const done = () => { if (btn) btn.classList.remove("playing"); };
+  let over = false;
+  const done = () => { if (btn) btn.classList.remove("playing"); if (then && !over && no === speakNo) { over = true; then(); } };
   if (S.engine === "online" && navigator.onLine !== false) return playOnline(text, done);
   if (!("speechSynthesis" in window)) { done(); toast("This browser can't play audio. Try the online voice in settings."); return; }
   pickVoice();
@@ -806,6 +810,7 @@ function rowHTML(p, showMod) {
     <button class="ko" data-act="say" aria-label="Play ${esc(p.ko)}"${tipOf("rom")}>${koHTML(p)}</button>
     <div class="acts">
       <button class="ic say" data-act="say" aria-label="Play audio">${ICON.say}</button>
+      <button class="ic shadow" data-act="shadow" aria-label="Say it and compare"${tipOf("shadowBtn")}>${ICON.mic}</button>
       <button class="ic tick" data-act="known" aria-pressed="${k}" aria-label="Mark as known">${ICON.tick}</button>
       <button class="ic star" data-act="fav" aria-pressed="${favs.has(p.id)}" aria-label="Save to favourites">${ICON.star}</button>
     </div>
@@ -826,7 +831,8 @@ function stopHTML(pl, i) {
   const links = (pl.gamesFirst ? games : "")
     + mods.map(m => link("#/m/" + m.id, "📖", m.title, `${knownIn(m.items)} of ${m.items.length} phrases`, tipOf("phrases"))).join("")
     + scenes.map(x => link("#/scenes/" + x.id, "💬", x.title, play.scenes[x.id] ? "⭐".repeat(play.scenes[x.id]) + " · play again" : "Conversation", tipOf("talk"))).join("")
-    + (pl.gamesFirst ? "" : games);
+    + (pl.gamesFirst ? "" : games)
+    + ((KT.clips || {})[pl.id] ? link("#/watch/" + pl.id, "▶️", "Watch", (KT.clips[pl.id].length) + " short videos of the real thing", tipOf("watch")) : "");
   return `<section class="stop${pct >= 100 ? " done" : ""}" data-sec>
     <div class="stop-n">${pct >= 100 ? "✓" : i + 1}</div>
     <div class="stop-card">
@@ -988,7 +994,7 @@ function renderModule(id) {
     <div class="mstats">${m.items.length} phrases · <span id="kCount">${knownIn(m.items)}</span> known${id === "fav" ? ` · ${keyList.length} card${keyList.length === 1 ? "" : "s"}` : ""}${md ? ` · ${MEDAL[md]} ${MEDAL_NAME[md]}` : ""}</div>
     <div class="mbtns">
       ${m.items.length ? `<button class="btn primary" data-act="practice"${tipOf("practise")}>${ICON.play} Practise</button>` : ""}
-      ${pl && window.KTGames ? `<a class="btn ghost" href="#/listen/${id}"${tipOf("listenBtn")}>🎧 Listen</a>` : ""}${talks.map(x => `<a class="btn ghost" href="#/scenes/${x.id}"${tipOf("talk")}>💬 ${esc(x.title)}</a>`).join("")}
+      ${pl && window.KTGames ? `<a class="btn ghost" href="#/listen/${id}"${tipOf("listenBtn")}>🎧 Listen</a><a class="btn ghost" href="#/shadow/${id}"${tipOf("shadowBtn")}>🎙️ Speak</a>` : ""}${talks.map(x => `<a class="btn ghost" href="#/scenes/${x.id}"${tipOf("talk")}>💬 ${esc(x.title)}</a>`).join("")}
       ${id === "mine" ? `<button class="btn ghost" data-act="edit-mine">Edit list</button>` : ""}
     </div>
   </div>`;
@@ -996,11 +1002,13 @@ function renderModule(id) {
   if (id === "mine") h += mineEditorHTML(!m.items.length);
   if (id === "fav" && !m.items.length && !keyList.length) h += `<div class="empty">Nothing saved yet. Tap ☆ on any phrase or any "Remember these" card and it will show up here.</div>`;
   h += `<div id="tabsAt"></div>${view.tabs.length > 1 ? `<div class="tabs" id="tabs" role="tablist">${tabsHTML()}</div>` : ""}<div id="pane">${paneHTML()}</div>`;
+  if (pl && window.KTGames) h += KTGames.clipsSection(pl);
   if (pl) {
     const nx = KT.places[KT.places.indexOf(pl) + 1], nm = nx && BY[nx.mods[0]];
     const go = (href, icon, title, sub, tip) => `<a class="sl" href="${href}"${tip || ""}><span>${icon}</span><div><b>${esc(title)}</b><small>${esc(sub)}</small></div>${ICON.right}</a>`;
     h += `<section class="area" data-sec><h2>Where next <span>다음은</span></h2><div class="list sls">`
       + talks.map(x => go("#/scenes/" + x.id, "💬", x.title, "Conversation — use these phrases in order", tipOf("talk"))).join("")
+      + (window.KTGames ? go("#/shadow/" + id, "🎙️", "Speak", "Say these phrases and compare your voice with the model", tipOf("shadowBtn")) : "")
       + (window.KTGames ? go("#/listen/" + id, "🎧", "Listen", "Ten of these phrases, by ear", tipOf("listenBtn")) : "")
       + pl.mods.filter(x => x !== id && BY[x]).map(x => go("#/m/" + x, "📖", BY[x].title, "More phrases at this stop")).join("")
       + (nm ? go("#/m/" + nm.id, "➡️", "Next stop: " + nx.title, nx.about) : "")
@@ -1084,7 +1092,7 @@ function renderSearch(q) {
 /* ───────────── router ───────────── */
 function route() {
   const q = $("#q").value.trim(), m = location.hash.match(/^#\/m\/([\w-]+)/);
-  const g = location.hash.match(/^#\/(play|hangul|scenes|build|polite|numbers|listen)(?:\/([\w-]+))?$/);
+  const g = location.hash.match(/^#\/(play|hangul|scenes|build|polite|numbers|listen|shadow|watch)(?:\/([\w-]+))?$/);
   let page = "home";
   if (q) { page = "search"; renderSearch(q); }
   else if (m) { page = m[1] === "fav" ? "fav" : "module"; renderModule(m[1]); }
@@ -1163,6 +1171,7 @@ app.addEventListener("click", e => {
   }
   const act = b.dataset.act, row = b.closest(".row"), p = row && ALL.find(x => x.id === row.dataset.id);
   if (act === "say" && p) speak(p.say, row.querySelector(".say"));
+  else if (act === "shadow" && p) { if (window.KTGames) KTGames.shadow([p], p.en); }
   else if (act === "known" && p) {
     if (known.has(p.id)) { known.delete(p.id); saveKnown(); delete SRS[p.id]; saveSRS(); }
     else { withRewards(p, () => { known.add(p.id); saveKnown(); bump(p.id); }); srsGot(p.id); }
@@ -1361,7 +1370,7 @@ let pending = KT.files.length;
 if (!pending) start();
 KT.files.forEach(f => {
   const s = document.createElement("script");
-  s.src = "modules/" + f + ".js"; s.async = false;
+  s.src = "modules/" + f + ".js?v=20261013042026"; s.async = false;
   s.onload = () => { if (!KT.modules.some(m => m.id === f)) KT.failed.push(f + ".js (id should be \"" + f + "\")"); if (--pending === 0) start(); };
   s.onerror = () => { KT.failed.push(f + ".js"); if (--pending === 0) start(); };
   document.head.appendChild(s);

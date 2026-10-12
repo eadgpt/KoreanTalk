@@ -98,6 +98,16 @@ KT.guides = {
     ["Two systems", "Sino numbers (일, 이, 삼) came from Chinese: money, dates, minutes, phone numbers, floors. Native numbers (하나, 둘, 셋) are for counting things and people, for hours, and for age."],
     ["Counters", "You can't just say “three coffees”. It is thing + number + counter: 커피 세 잔. 개 for things, 명 for people, 잔 for cups, 병 for bottles."],
     ["The clock uses both", "세 시 이십 분 = 3:20 — a native hour followed by Sino minutes."]] },
+  shadow: { label: "About shadowing", tip: "Hear a phrase, say it straight back, then hear the model and your own voice one after the other. The fastest way to fix pronunciation.", guide: [
+    ["Why speak out loud", "Recognising a phrase and being able to say it are different skills. Your mouth has to learn the shapes — the tight ㄲ, the flat ㅡ, the way sounds run together — and that only happens by saying them."],
+    ["Why hear yourself", "While you speak you can't judge how you sound. Played back right after the model, the differences are obvious: a vowel that's too English, a syllable you swallowed, a rhythm that's too flat."],
+    ["How to do it", "Listen once. Say it at the same speed, copying the tune as well as the words. Compare, then try again until the two sound alike. Three good repeats beat ten careless ones."],
+    ["Good to know", "The recording never leaves your device and is thrown away when you move on. Your browser will ask to use the microphone the first time."]] },
+  watch: { label: "About the videos", tip: "Short videos by Korean teachers on YouTube, one set per stop. See the faces, gestures and real speed that a phrase list can't show.", guide: [
+    ["Why watch", "Korean is more than its words: a small bow with 감사합니다, both hands when passing a card, the rising tune of a question. Video shows what audio alone leaves out."],
+    ["How to use them", "Learn a stop's phrases first, then watch. You are not trying to understand everything — you are listening for the phrases you already know, said by real people at real speed."],
+    ["Then say it", "After a video, open Speak for the same stop and copy what you just heard while it is fresh."],
+    ["Good to know", "These videos belong to their makers and play from YouTube, so they need internet. They were chosen by title and channel and have not been checked word for word against this app's phrases."]] },
   polite: { label: "About speech levels", tip: "The same sentence changes its ending depending on who is listening. Flip between friend, stranger and formal to see the pattern.", guide: [
     ["Why it matters", "In Korean you can't say anything without choosing a level. The wrong one doesn't just sound odd: casual speech to a stranger is rude."],
     ["The three you need", "Casual (반말) drops the ending: 가. Polite (해요체) adds 요: 가요. Formal (합니다체) ends in ㅂ니다: 갑니다."],
@@ -113,6 +123,8 @@ KT.tips = {
   practise: "Practise|Flashcards. A phrase you get right comes back after 1, 3, 7, 14, 30 and 60 days — just before you would forget it.",
   pic: "Picture cue|A quick visual hook for the situation, so the phrase sticks to a scene instead of to its English translation.",
   hear: "Said to you|You will hear this rather than say it. Learn to recognise it by ear — you don't have to produce it.",
+  shadowBtn: "Say it|Hear the phrase, record yourself saying it, then hear the model and your own voice back to back.",
+  watch: "Watch|Short videos by Korean teachers showing this place for real — faces, gestures and natural speed.",
   hearWord: "🔊 Click to hear it",
   rom: "Romanization|How the word sounds, in Latin letters. It follows pronunciation, not spelling. Switch it off in Settings once you can read Hangul.",
   remember: "Remember these|The few ideas that make the rest of this set make sense: a grammar pattern, a habit, a bit of culture. Tap any Korean to hear it.",
