@@ -298,6 +298,8 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
 /* ── module page: topic tabs, one topic at a time ── */
 .tabs{position:sticky;top:calc(60px + env(safe-area-inset-top));z-index:10;margin:14px -16px 0;padding:9px 16px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
 .tab{flex:none;height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);font-weight:600;font-size:max(12px,calc(13.5px*var(--fs)));display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+/* with a mouse there is no easy way to swipe sideways, so on a wide screen the topics wrap onto extra rows instead of running off the edge */
+@media (hover:hover) and (min-width:700px){.tabs{flex-wrap:wrap;overflow:visible}}
 .tab em{font-style:normal;font-weight:600;color:var(--muted);font-size:max(12px,calc(12px*var(--fs)))}
 .tab.done em{color:var(--jade)}
 .tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
@@ -361,8 +363,8 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
 .confetti i{position:absolute;top:-24px;width:9px;height:14px;border-radius:2px;animation:fall 1.6s ease-in forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(600deg)}}
 </style>
-<link rel="stylesheet" href="lib/games.css?v=20261013042026">
-<link rel="stylesheet" href="lib/motion.css?v=20261013042026">
+<link rel="stylesheet" href="lib/games.css?v=20261013044123">
+<link rel="stylesheet" href="lib/motion.css?v=20261013044123">
 </head>
 <body>
 
@@ -440,23 +442,23 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
 
 <div class="toast" id="toast"></div>
 
-<script src="lib/hangul.js?v=20261013042026"></script>
-<script src="lib/art.js?v=20261013042026"></script>
-<script src="lib/icons.js?v=20261013042026"></script>
+<script src="lib/hangul.js?v=20261013044123"></script>
+<script src="lib/art.js?v=20261013044123"></script>
+<script src="lib/icons.js?v=20261013044123"></script>
 <script>
 // Modules call KT.module({...}) when they load.
 window.KT = { modules: [], failed: [], areas: [], files: [], changelog: [],
   module(def) { if (!this.modules.some(m => m.id === def.id)) this.modules.push(def); } };
 </script>
-<script src="modules/list.js?v=20261013042026"></script>
-<script src="data/places.js?v=20261013042026"></script>
-<script src="data/hangul.js?v=20261013042026"></script>
-<script src="data/scenes.js?v=20261013042026"></script>
-<script src="data/builder.js?v=20261013042026"></script>
-<script src="data/polite.js?v=20261013042026"></script>
-<script src="data/clips.js?v=20261013042026"></script>
-<script src="lib/games.js?v=20261013042026"></script>
-<script src="lib/motion.js?v=20261013042026"></script>
+<script src="modules/list.js?v=20261013044123"></script>
+<script src="data/places.js?v=20261013044123"></script>
+<script src="data/hangul.js?v=20261013044123"></script>
+<script src="data/scenes.js?v=20261013044123"></script>
+<script src="data/builder.js?v=20261013044123"></script>
+<script src="data/polite.js?v=20261013044123"></script>
+<script src="data/clips.js?v=20261013044123"></script>
+<script src="lib/games.js?v=20261013044123"></script>
+<script src="lib/motion.js?v=20261013044123"></script>
 <script>
 (function () {
 "use strict";
@@ -1370,7 +1372,7 @@ let pending = KT.files.length;
 if (!pending) start();
 KT.files.forEach(f => {
   const s = document.createElement("script");
-  s.src = "modules/" + f + ".js?v=20261013042026"; s.async = false;
+  s.src = "modules/" + f + ".js?v=20261013044123"; s.async = false;
   s.onload = () => { if (!KT.modules.some(m => m.id === f)) KT.failed.push(f + ".js (id should be \"" + f + "\")"); if (--pending === 0) start(); };
   s.onerror = () => { KT.failed.push(f + ".js"); if (--pending === 0) start(); };
   document.head.appendChild(s);
