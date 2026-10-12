@@ -173,6 +173,7 @@ svg{display:block}
 .sheet.open,.sheet-bg.open{display:block}
 .sheet{max-height:calc(100vh - 84px);max-height:calc(100dvh - 84px - env(safe-area-inset-top));overflow-y:auto}
 #fsSeg{align-items:center}
+.sheet .opt{gap:6px 10px;flex-wrap:wrap}   /* a long label drops under its row at large text sizes instead of running off the side */
 #fsSeg span{min-width:3.4em;text-align:center;font-size:max(12px,calc(13px*var(--fs)));font-weight:600}
 .seg button:disabled{opacity:.35;cursor:default}
 .sheet h4{margin:10px 0 4px;font-size:max(12px,calc(12px*var(--fs)));text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
@@ -1217,6 +1218,8 @@ function applySettings() {
   document.querySelectorAll("#fsSeg button").forEach(b => b.disabled = +b.dataset.fs < 0 ? fi === 0 : fi === FS.length - 1);
   document.querySelectorAll("#themeSeg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.theme === S.theme));
   document.querySelectorAll("#engSeg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.eng === S.engine));
+  // an iPhone or iPad mutes its own voice whenever the ring/silent switch is on silent, so the label says so
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) $('#engSeg [data-eng="device"]').textContent = "This device (not on silent)";
   document.querySelectorAll("#homeSeg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.home === S.home));
   pickVoice();
   const dark = isDark();
