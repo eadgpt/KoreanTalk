@@ -85,6 +85,9 @@ M | The look I'm going for | 추구미 | 추구하는 미 — "the beauty I purs
 M | Hit a nerve | 긁혔다 | Literally "got scratched". 긁? = "touched a nerve?" | 2024; friends
 H | Bold, direct "testosterone type" man | 테토남 | The personality meme after MBTI. Woman: 테토녀 | 2025; friends; src=https://v.daum.net/v/20250324104352907
 H | Gentle, sensitive "estrogen type" woman | 에겐녀 | The opposite of 테토녀. Man: 에겐남 | 2025; friends; src=https://www.allurekorea.com/?p=292942
-H | "What a commotion!" | 난리자베스 | 난리 났다 + "Elizabeth", tacked on the end of a sentence | 2026; friends; check; src=https://www.jobplanet.co.kr/contents/news-7958
+H | "What a commotion!" | 난리자베스 | 난리 났다 + "Elizabeth", tacked on the end of a sentence | 2026; friends; src=https://www.jobplanet.co.kr/contents/news-7958
+M | Fun with zero responsibility | 책없쾌 | 책임 없는 쾌락. Spoiling your nephew, then handing him back. 오늘은 책없쾌 즐겨야지 | 2026; friends; src=https://www.careet.net/1945; new=2026-10-21
+M | Yay! / Amazing! | 할렐야루 | 할렐루야 shouted in the wrong order in a viral church youth-group reel. Not religious | 2026; friends; src=https://maily.so/trendaword/posts/vpzl8wwdrk9; new=2026-10-21
+H | Do a sudden U-turn | 엔믹스하다 | From K-pop group NMIXX, whose songs switch genre mid-song. 태세 전환이 엔믹스급이네 | 2026; friends; check; src=https://maily.so/trendaword/posts/knrj18g7rld; new=2026-10-21
 `
 });

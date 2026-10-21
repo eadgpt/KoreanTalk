@@ -18,5 +18,6 @@ KT.files = [
 
 // Newest first. The top entry shows on the home page.
 KT.changelog = [
+  { date: "2026-10-21", text: "Slang update: 책없쾌, 할렐야루, 엔믹스하다." },
   { date: "2026-10-11", text: "First release: Hangul trainer, 8 conversation scenes, sentence builder, numbers game, politeness switch, and 11 phrase modules including slang." }
 ];
