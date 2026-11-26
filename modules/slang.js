@@ -85,16 +85,17 @@ M | The look I'm going for | 추구미 | 추구하는 미 — "the beauty I purs
 M | Hit a nerve | 긁혔다 | Literally "got scratched". 긁? = "touched a nerve?" | 2024; friends
 H | Bold, direct "testosterone type" man | 테토남 | The personality meme after MBTI. Woman: 테토녀 | 2025; friends; src=https://v.daum.net/v/20250324104352907
 H | Gentle, sensitive "estrogen type" woman | 에겐녀 | The opposite of 테토녀. Man: 에겐남 | 2025; friends; src=https://www.allurekorea.com/?p=292942
-H | "What a commotion!" | 난리자베스 | 난리 났다 + "Elizabeth", tacked on the end of a sentence | 2026; friends; src=https://www.jobplanet.co.kr/contents/news-7958
-M | Fun with zero responsibility | 책없쾌 | 책임 없는 쾌락. Spoiling your nephew, then handing him back. 오늘은 책없쾌 즐겨야지 | 2026; friends; src=https://www.careet.net/1945; new=2026-10-21
-M | Yay! / Amazing! | 할렐야루 | 할렐루야 shouted in the wrong order in a viral church youth-group reel. Not religious | 2026; friends; src=https://maily.so/trendaword/posts/vpzl8wwdrk9; new=2026-10-21
-H | Do a sudden U-turn | 엔믹스하다 | From K-pop group NMIXX, whose songs switch genre mid-song. 태세 전환이 엔믹스급이네 | 2026; friends; check; src=https://maily.so/trendaword/posts/knrj18g7rld; new=2026-10-21
-M | Thanks! (jokey) | 아자스 | Clipped from Japanese "arigato gozaimasu". Students tack it on everywhere. Can sound teasing | 2026; friends; src=https://v.daum.net/v/20260502160116660; new=2026-11-03
-M | Ugly, tacky, lame | 밤티 | From a mocked avatar nicknamed 밤티 in the game Line Play. 이 옷 좀 밤티다. Don't use it about someone's looks | 2026; friends; src=https://www.jobplanet.co.kr/contents/news-7891; new=2026-11-03
-M | Yay! / Score! | 야르 | Like 아싸 or 오예. 야르바이트 = a dream part-time job | 2026; friends; src=https://bravo.etoday.co.kr/view/atc_view/19227; new=2026-11-03
-H | Young and in the know | 영크크 | From CORTIS's song "YOUNGCREATORCREW". Someone out of touch is 늙크크 | 2026; friends; src=https://v.daum.net/v/XD5dikOcGZ; new=2026-11-03
-M | Tea outdoors | 야차 | 야외 outdoors + 차 tea — a flask of hot water and a teacup in the park. 우리 야차 할까? Same sound as an old word for a no-rules fight, so context matters | 2026; safe; src=https://www.khan.co.kr/article/202610230600141; new=2026-11-10
-M | "Can't be bothered now it's time to go" | 막나귀 | 막상 나가려니 귀찮다. Sounds like 당나귀 (donkey). 막나귀 와서 아직 준비도 못 했어 | 2025; friends; src=https://v.daum.net/v/20260803060103398; new=2026-11-10
-M | No filter, no edits (photo caption) | 기카노보 | 기본 카메라 노 보정 — default camera, no retouching. Coined by dancer Honey J | 2022; safe; text; src=https://sports.khan.co.kr/article/202207011809013; new=2026-11-10
+H | "What a commotion!" | 난리자베스 | 난리 났다 + "Elizabeth", tacked on the end of a sentence | 2026; friends; check; src=https://www.jobplanet.co.kr/contents/news-7958
+
+# Late 2026 | 2026 하반기 | 🌟
+M | A perfectly ordinary, peaceful day | 아보하 | 아주 보통의 하루 — happy with a plain good day | 2025; safe; new=2026-11-26
+M | Great sense! / Nailed it | 감다살 | 감 다 살아있네 — your instincts are alive | 2026; friends; new=2026-11-26; src=https://news.nate.com/view/20260724n04232
+M | Lost your touch | 감다뒤 | 감 다 뒤졌네 — the opposite of 감다살. A bit rude | 2026; friends; new=2026-11-26; src=https://news.nate.com/view/20260724n04232
+M | Yay! / Woohoo! | 야르 | A happy cheer. Bigger: 할렐야루 (할렐루야 + 야르) | 2026; friends; new=2026-11-26; src=https://hurumor.com/%EC%8B%A0%EC%A1%B0%EC%96%B4-2026/
+M | Tacky, a bit off | 밤티 | Usually "meh / not pretty". Fans also use it fondly for a goofy idol | 2026; friends; new=2026-11-26; src=https://luckyvicky.moamoang.co.kr/trends/slang/
+M | "My heart just got warm" | 가슴에 국밥 쏟음 | Literally "spilled hot soup on my chest" — said at a heart-warming moment | 2026; friends; check; new=2026-11-26; src=https://dailyttut.blogspot.com/2026/09/50.html
+M | Take the L | L을 가져가 | You lost, so admit it. From English "take the L" | 2026; friends; check; new=2026-11-26; say=엘을 가져가; src=https://hurumor.com/%EC%8B%A0%EC%A1%B0%EC%96%B4-2026/
+H | "Somehow I ended up at work" | 회사 와졌어 | Joke: you came in on autopilot, not by choice | 2026; friends; check; new=2026-11-26; src=https://hurumor.com/%EC%8B%A0%EC%A1%B0%EC%96%B4-2026/
+H | Quiet quitting | 조용한 퇴사 | Staying in the job but doing only the minimum | 2023; safe; new=2026-11-26
 `
 });
